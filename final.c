@@ -1,5 +1,4 @@
   
-
 // talvez oq coloquei ai não faça o menor sentioo
 
 #include <stdio.h>
@@ -22,25 +21,94 @@ void deleteRegistro();
 
 // STRUCTS
 
+typedef struct codigoPessoa{
+    int numero;
+}cod_p;
+
+typedef struct codigoEstabelecimento{
+    int numero;
+}cod_e;
+
+typedef struct endereco{
+    char logradouro[50];
+    int numero;
+    int cep;
+    char cidade[50];
+    char estado[2] 
+}end;
+
+typedef struct data{
+    int dia;
+    int mes;
+    int ano;
+}data;
+
+typedef struct telefone{
+    int ddd;
+    int fixo;
+    int celular;
+}tel;
+
+typedef struct dadosPessoaisFisica{
+    cod_p;
+    char nome[50];
+    char sobrenome[50];
+    int cpf;
+    nasc;
+    end; 
+    tel;
+}pfisica;
+
+typedef struct dadosPessoaisJuridica{
+    cod_e;
+    char nome[50];
+    char sobrenome[50];
+    int cnpj;
+    end; 
+    tel;
+    doa;
+}pjuridica;
+
+typedef struct dadosFamilias{
+    cod_p;
+    char nome[50];
+    char sobrenome[50];
+    int cpf;
+    nasc;
+    end;
+    tel;
+    int membros;
+}fam;
+
+typedef struct doação{
+    int quantidade;
+    char info[100];
+    data;
+}doa;
+
 
 typedef struct pessoas{
-    int cpf, ddd, numero, codigo;
+    int cpf, ddd, telefone, codigo;
     char nome[50], sobrenome[50];
 }pes;
 
+
+
 typedef struct pontes{
-    int cpf, ddd, numero, codigo;
+    int cpf, ddd, telefone, codigo;
     char nome[50], sobrenome[50];
 }pont;
 
-typedef struct restaurant{
+typedef struct restaurante{
     int cep;
     char nome[50], sobras;
 }restt;
 
+
+
 typedef struct ciclos{
     int kg, dia, mes, ano;
-    struct restaurant;
+    struct restaurante;
     
 }cic;
 
@@ -65,7 +133,7 @@ int main(void){
     
     parc *parceiros=malloc(10000*sizeof(parc));
     int numPes, numPont, numRest, numCic, numParc;
-    numPes=1
+    numPes=1;
     cadastroIndividuo(&pessoa[numPes]);
 }
 
@@ -80,9 +148,9 @@ void numeroRandom(){
 };
 
 void cadastroRest(){
-    struct restaurant;
+    struct restaurante;
     codigoRandomUnico();
-    sobras(kg)
+    sobras(kg);
 };
 
 void cadastroPonte(){
