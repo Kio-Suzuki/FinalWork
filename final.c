@@ -59,6 +59,10 @@ int main(void){
     pont *ponte=malloc(10000*sizeof(pont));
     restt *rest=malloc(10000*sizeof(restt));
     cic *ciclos=malloc(10000*sizeof(cic));
+
+    /* tentei usar alocação dinamica aq, mas ficou bem confuso, a tentativa era adicionar 10k posiçoes de cada um dos registros
+    , mas botando pra funfar fica bem zoado, ce acha q daria pra usar alocacao dinamica em outro lugar ? */
+    
     parc *parceiros=malloc(10000*sizeof(parc));
     int numPes, numPont, numRest, numCic, numParc;
     numPes=1
