@@ -14,7 +14,7 @@
 int numeroRandom();
 void cadastroRest();
 void cadastroPonte();
-pes cadastroIndividuo();
+void cadastroIndividuo();
 void cadastroParceiros();
 void pesquisar();
 void deleteRegistro();
@@ -37,6 +37,7 @@ typedef struct endereco{
     char estado[2] 
 }end;
 
+// data para doação e tambem para nascimento.
 typedef struct data{
     int dia;
     int mes;
@@ -54,10 +55,13 @@ typedef struct dadosPessoaisFisica{
     char nome[50];
     char sobrenome[50];
     int cpf;
-    nasc;
+    data;
     end; 
     tel;
 }pfisica;
+
+
+// Cadastro de restaurantes, mercados, pessoas juridicas.
 
 typedef struct dadosPessoaisJuridica{
     cod_e;
@@ -74,7 +78,7 @@ typedef struct dadosFamilias{
     char nome[50];
     char sobrenome[50];
     int cpf;
-    nasc;
+    data;
     end;
     tel;
     int membros;
@@ -87,50 +91,17 @@ typedef struct doação{
 }doa;
 
 
-typedef struct pessoas{
-    int cpf, ddd, telefone, codigo;
-    char nome[50], sobrenome[50];
-}pes;
-
-
-
-typedef struct pontes{
-    int cpf, ddd, telefone, codigo;
-    char nome[50], sobrenome[50];
-}pont;
-
-typedef struct restaurante{
-    int cep;
-    char nome[50], sobras;
-}restt;
-
-
-
-typedef struct ciclos{
-    int kg, dia, mes, ano;
-    struct restaurante;
-    
-}cic;
-
-typedef struct parceiros{
-    int nome;
-    
-}parc;
-
-
-
-
 // MAIN
 
 int main(void){
+    
+    
+    // Erro por completo aqui.
+
     pes *pessoa=malloc(10000*sizeof(pes));
     pont *ponte=malloc(10000*sizeof(pont));
     restt *rest=malloc(10000*sizeof(restt));
     cic *ciclos=malloc(10000*sizeof(cic));
-
-    /* tentei usar alocação dinamica aq, mas ficou bem confuso, a tentativa era adicionar 10k posiçoes de cada um dos registros
-    , mas botando pra funfar fica bem zoado, ce acha q daria pra usar alocacao dinamica em outro lugar ? */
-    
     parc *parceiros=malloc(10000*sizeof(parc));
     int numPes, numPont, numRest, numCic, numParc;
     numPes=1;
@@ -158,7 +129,6 @@ void cadastroPonte(){
         struct pontes;
 
 };
-
 void cadastroIndividuo(pes *pessoa, int pos){
     pessoa[pos].codigo=numeroRandom();
     fgets(pessoa[pos].nome,50,stdin);
