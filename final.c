@@ -11,7 +11,7 @@
 //FUNÇÕES (PROTOTIPOS)
 
 
-int numeroRandom();
+int numeroRandom(int cod[10);
 void cadastroRest();
 void cadastroPonte();
 void cadastroIndividuo();
@@ -112,11 +112,35 @@ int main(void){
 
 // FUNÇÕES (CONSTRUIDAS)
 
-void numeroRandom(){
+void numeroRandom(int cod[10){
     srand(time(NULL));
-    int valor = rand()%10000;
-    return valor;
-};
+    int L[10][10], i, j, cont;                           
+    for (i=0; i<10; i++){                                      
+        for (j=0; j<10; j++){                              
+            L[i][j] = rand() %10;                               
+            if (L[i][j]<5){                                     
+                L[i][j]=0;
+            }else
+                L[i][j]=1;
+        }
+    }
+    for (i=0; i<10; i++){                                      
+        for (j=0; j<10; j++){                              
+            if(L[i][j]){
+                cont++; 
+            }
+        }
+        if(cont>5){
+            cod[i]=1;
+        }
+        else{
+            cod[i]=0;
+        }
+        printf("\n");
+        cont=0;
+    }
+}
+;
 
 void cadastroRest(){
     struct restaurante;
