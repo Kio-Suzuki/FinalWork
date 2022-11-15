@@ -95,7 +95,9 @@ typedef struct doação{
 
 int main(void){
     
-    
+    int numPes, numPont, numRest, numCic, numParc;
+    int escolha;
+    int login, senha;
     // Erro por completo aqui.
 
     pes *pessoa=malloc(10000*sizeof(pes));
@@ -103,9 +105,59 @@ int main(void){
     restt *rest=malloc(10000*sizeof(restt));
     cic *ciclos=malloc(10000*sizeof(cic));
     parc *parceiros=malloc(10000*sizeof(parc));
-    int numPes, numPont, numRest, numCic, numParc;
     numPes=1;
-    cadastroIndividuo(&pessoa[numPes]);
+    do(
+        printf("\n*******************************************************\n* Menu de seleção:                                    *\n* Digite 1 para entrar no Menu de Cadastramento;      *\n* Digite 2 para entrar no menu de edição de cadastros;* \n* Digite 3 para entrar no menu de exclusão;           *\n*******************************************************");
+        scanf("%d", &escolha);
+        switch(escolha)
+
+            case 1:
+                printf("\n*******************************************************\n* Menu de seleção:                                    *\n* Digite 1 para cadastrar um individuo/familia ;      *\n* Digite 2 para cadastrar um Restaurante;             * \n* Digite 3 para cadastrar um parceiro                 *\n*******************************************************");
+                scanf("%d", &escolha);
+                switch(escolha){
+                    case 1:
+
+                        break;
+                    case 2:
+                    
+                        break;
+                    case 3:
+                    
+                        break;
+                }
+            break;
+            case 2:
+                printf("\n*******************************************************\n* Menu de seleção:                                    *\n* Digite 1 para editar um individuo/familia ;         *\n* Digite 2 para editar um Restaurante;                * \n* Digite 3 para editar um parceiro;                   *\n*******************************************************");
+                scanf("%d", &escolha);
+                switch(escolha){
+                    case 1:
+                    
+                        break;
+                    case 2:
+                    
+                        break;
+                    case 3:
+                    
+                        break;
+                }
+            break;
+            case 3:
+                printf("\n*******************************************************\n* Menu de seleção:                                    *\n* Digite 1 para excluir um individuo/familia ;        *\n* Digite 2 para excluir um Restaurante;               * \n* Digite 3 para excluir um parceiro;                  *\n*******************************************************");
+                scanf("%d", &escolha);
+                switch(escolha){
+                    case 1:
+                    
+                        break;
+                    case 2:
+                    
+                        break;
+                    case 3:
+
+                        break;
+
+            }
+    )while(escolha!=0);
+        cadastroIndividuo(&pessoa[numPes]);
 }
 
 
