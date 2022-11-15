@@ -19,6 +19,15 @@ void cadastroParceiros();
 void pesquisar();
 void deleteRegistro();
 
+
+// PESQUIIAR INFOS
+// DISTRIBUIR ALIMENTOS
+// ADICIONAR ALIMENTOS
+// ADICIONAR RESTAURANTES
+// ADICIONAR CLIENTES
+// ADICIONAR PARCEIROS
+// 
+
 // STRUCTS
 
 typedef struct codigoPessoa{
