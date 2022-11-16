@@ -4,6 +4,7 @@
 #include <math.h>
 #include <string.h>
 #include <locale.h>
+#include <windows.h>
 
 //FUNÇÕES (PROTOTIPOS)
 
@@ -162,6 +163,7 @@ void menuPrincipal()
 
 void imprimeOpcoes()
 {
+    
     printf ("1 - Pessoas\n");
     printf ("2 - Voluntarios\n");
     printf ("3 - Restaurantes\n");
@@ -233,16 +235,17 @@ void menuPesquisar()
 
 void pesquisarPessoas()
 {
+    setlocale(LC_ALL,"Portuguese");
     int opt, cpf, data, priori, codU;
     char nome[50], gen;
     do{
         printf ("1 - Nome\n");
         printf ("2 - Sobrenome\n");
         printf ("3 - CPF\n");
-        printf ("4 - Gênero\n");
+        printf ("4 - Genero\n");
         printf ("5 - Data de nascimento\n");
         printf ("6 - Prioridade\n");
-        printf ("7 - Código Único\n");
+        printf ("7 - Codigo Unico\n");
         printf ("8 - Retornar\n");
         printf ("0 - Sair\n");
         scanf ("%d", &opt);       
@@ -264,7 +267,7 @@ void pesquisarPessoas()
             break;
 
         case 4:
-            printf ("Gênero: ");
+            printf ("Genero: ");
             scanf ("%c", &gen);
             break;
             
@@ -279,7 +282,7 @@ void pesquisarPessoas()
             break;
 
         case 7:
-            printf ("Código Único: ");
+            printf ("Codigo Unico: ");
             scanf ("%d", &codU);
             break;
 
@@ -300,9 +303,9 @@ void pesquisarVoluntarios()
         printf ("1 - Nome\n");
         printf ("2 - Sobrenome\n");
         printf ("3 - CPF\n");
-        printf ("4 - Gênero\n");
+        printf ("4 - Genero\n");
         printf ("5 - Data de nascimento\n");
-        printf ("6 - Código Único\n");
+        printf ("6 - Codigo Único\n");
         printf ("7 - Retornar\n");
         printf ("0 - Sair\n");
         scanf ("%d", &opt);       
@@ -324,7 +327,7 @@ void pesquisarVoluntarios()
             break;
 
         case 4:
-            printf ("Gênero: ");
+            printf ("Genero: ");
             scanf ("%c", &gen);
             break;
 
@@ -334,7 +337,7 @@ void pesquisarVoluntarios()
             break;
 
         case 6:
-            printf ("6 - Código Único\n");
+            printf ("6 - Codigo Unico\n");
             scanf ("%d", &codU);
             break;
 
@@ -354,7 +357,7 @@ void pesquisarRestaurantes()
     do{
         printf ("1 - Nome\n");
         printf ("2 - CNPJ\n");
-        printf ("3 - Código Único\n");
+        printf ("3 - Codigo Unico\n");
         printf ("4 - Retornar\n");
         printf ("0 - Sair\n");
         scanf ("%d", &opt);       
@@ -371,7 +374,7 @@ void pesquisarRestaurantes()
             break;
 
         case 3:
-            printf ("6 - Código Único\n");
+            printf ("6 - Codigo Unico\n");
             scanf ("%d", &codU);
             break;
 
