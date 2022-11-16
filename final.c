@@ -156,11 +156,13 @@ void menuPrincipal()
             scanf ("%s", login);
             printf ("Senha: ");
             scanf ("%s", senha);
+            menuAdmin();
             break;
         
         case 2:
-            printf ("Pesquisar: ");
-            imprimeOpcoes();
+            printf ("Pesquisar restaurantes: ");
+            printf ("1 - Endereco\n");
+            printf ("2 - Refeicoes\n");
             break;
         }
     }while(opt != 0);
