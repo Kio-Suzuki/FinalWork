@@ -7,13 +7,14 @@
 
 //FUNÇÕES (PROTOTIPOS)
 
-int gerarCodigo(int cod[10]);
-void cadastroRest();
-void cadastroPonte();
-void cadastroIndividuo();
-void cadastroParceiros();
-void pesquisar();
-void deleteRegistro();
+void gerarCodigo();
+void menuPrincipal();
+void imprimeOpcoes();
+void menuCadastrar();
+void menuPesquisar();
+void pesquisarPessoas();
+void pesquisarVoluntarios();
+void pesquisarRestaurantes();
 
 // PESQUIIAR INFOS
 // DISTRIBUIR ALIMENTOS
@@ -25,11 +26,11 @@ void deleteRegistro();
 // STRUCTS
 
 typedef struct codigoPessoa{
-    int numero;
+    int codP;
 }cod_p;
 
 typedef struct codigoEstabelecimento{
-    int numero;
+    int codE;
 }cod_e;
 
 typedef struct endereco{
@@ -37,7 +38,7 @@ typedef struct endereco{
     int numero;
     int cep;
     char cidade[50];
-    char estado[2] 
+    char estado[2]; 
 }end;
 
 // data para doação e tambem para nascimento.
@@ -68,6 +69,12 @@ typedef struct dadosPessoaisFisica{
 
 // Cadastro de restaurantes, mercados, pessoas juridicas.
 
+typedef struct doacao{
+    int quantidade;
+    char info[100];
+    data;
+}doa;
+
 typedef struct dadosPessoaisJuridica{
     cod_e;
     char nome[50];
@@ -90,88 +97,17 @@ typedef struct dadosFamilias{
     int membros;
 }fam;
 
-typedef struct doação{
-    int quantidade;
-    char info[100];
-    data;
-}doa;
-
-
-
 // MAIN
 
 int main()
 {
-    int numPes, numPont, numRest, numCic, numParc;
-    int escolha;
-    int login, senha;
     setlocale(LC_ALL,"");
-    // Erro por completo aqui.
-
-    do{
-        printf ("\n*******************************************************\n");
-        printf ("Para acessar o Menu, digite:\n");                              
-        printf ("1 - Menu de Cadastramento\n");      
-        printf ("2 - Editar cadastros\n");
-        printf ("3 - Excluir cadastros\n");           
-        printf ("\n*******************************************************\n");
-        scanf ("%d", &escolha);
-        switch(escolha)
-
-            case 1:
-                printf("\n*******************************************************\n* Menu de seleção:                                    *\n* Digite 1 para cadastrar um individuo/familia ;      *\n* Digite 2 para cadastrar um Restaurante;             * \n* Digite 3 para cadastrar um parceiro                 *\n*******************************************************");
-                scanf("%d", &escolha);
-                switch(escolha){
-                    case 1:
-
-                        break;
-                    case 2:
-                    
-                        break;
-                    case 3:
-                    
-                        break;
-                }
-            break;
-            //case 2:
-                printf("\n*******************************************************\n* Menu de seleção:                                    *\n* Digite 1 para editar um individuo/familia ;         *\n* Digite 2 para editar um Restaurante;                * \n* Digite 3 para editar um parceiro;                   *\n*******************************************************");
-                scanf("%d", &escolha);
-                switch(escolha){
-                    case 1:
-                    
-                        break;
-                    case 2:
-                    
-                        break;
-                    case 3:
-                    
-                        break;
-                }
-            break;
-            //case 3:
-                printf("\n*******************************************************\n* Menu de seleção:                                    *\n* Digite 1 para excluir um individuo/familia ;        *\n* Digite 2 para excluir um Restaurante;               * \n* Digite 3 para excluir um parceiro;                  *\n*******************************************************");
-                scanf("%d", &escolha);
-                switch(escolha){
-                    case 1:
-                    
-                        break;
-                    case 2:
-                    
-                        break;
-                    case 3:
-
-                        break;
-
-            }
-    }while(escolha!=0);
-        
+    menuPrincipal();
 }
-
-
-
+    
 // FUNÇÕES (CONSTRUIDAS)
 
-int gerarCodigo(int codU[10])
+void gerarCodigo()
 {
     int cod[10][10], i, j, cont = 0, codU[10]; 
     srand(time(NULL));
@@ -199,24 +135,6 @@ int gerarCodigo(int codU[10])
     }
 }
     
-void cadastroRestaurante(){
-    struct restaurante;
-    //gerarCodigo();
-    sobras();
-}
-
-void cadastroIndividuo(){
-    //pessoa[pos].codigo=numeroRandom();
-    //fgets(pessoa[pos].nome,50,stdin);
-    //fgets(pessoa[pos].sobrenome,50,stdin);
-    //scanf("%d", pessoa[pos].cpf);
-}
-
-void cadastroParceiros(){
-    //gerarCodigo();
-    struct parceiros;
-}
-
 void menuPrincipal()
 {
     int opt;
@@ -264,17 +182,17 @@ void menuCadastrar()
         {
         case 1:
             imprimeOpcoes();
-            scanf ("%d", opt);
+            scanf ("%d", &opt);
             break;
         
         case 2:
             imprimeOpcoes();
-            scanf ("%d", opt);
+            scanf ("%d", &opt);
             break;
 
         case 3:
             imprimeOpcoes();
-            scanf ("%d", opt);
+            scanf ("%d", &opt);
             break;
 
         default:
@@ -313,7 +231,7 @@ void menuPesquisar()
     }while(opt != 0);
 }
 
-int pesquisarPessoas()
+void pesquisarPessoas()
 {
     int opt, cpf, data, priori, codU;
     char nome[50], gen;
@@ -347,7 +265,7 @@ int pesquisarPessoas()
 
         case 4:
             printf ("Gênero: ");
-            scanf ("%c", gen);
+            scanf ("%c", &gen);
             break;
             
         case 5:
@@ -374,7 +292,7 @@ int pesquisarPessoas()
     }while(opt != 0);
 }
         
-int pesquisarVoluntarios()
+void pesquisarVoluntarios()
 {
     int opt, cpf, data, codU;
     char nome[50], gen;
@@ -407,7 +325,7 @@ int pesquisarVoluntarios()
 
         case 4:
             printf ("Gênero: ");
-            scanf ("%c", gen);
+            scanf ("%c", &gen);
             break;
 
         case 5:
@@ -429,7 +347,7 @@ int pesquisarVoluntarios()
     }while(opt != 0);
 }
      
-int pesquisarRestaurantes()
+void pesquisarRestaurantes()
 {
     int opt, cnpj, codU;
     char nome[50];
