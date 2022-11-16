@@ -26,6 +26,11 @@ void pesquisarRestaurantes();
 
 // STRUCTS
 
+typedef struct login{
+    char login[20];
+    char senha[10];
+}login;
+
 typedef struct codigoPessoa{
     int codP;
 }cod_p;
@@ -66,7 +71,6 @@ typedef struct dadosPessoaisFisica{
     end; 
     tel;
 }pfisica;
-
 
 // Cadastro de restaurantes, mercados, pessoas juridicas.
 
@@ -137,6 +141,32 @@ void gerarCodigo()
 }
     
 void menuPrincipal()
+{
+    int opt;
+    char login[20], senha[10];
+    do{
+        printf ("1 - Admin\n");
+        printf ("2 - Visitante\n");
+        printf ("0 - Sair\n");
+        scanf ("%d", &opt);
+        switch (opt)
+        {
+        case 1:
+            printf ("Login: \n");
+            scanf ("%s", login);
+            printf ("Senha: ");
+            scanf ("%s", senha);
+            break;
+        
+        case 2:
+            printf ("Pesquisar: ");
+            imprimeOpcoes();
+            break;
+        }
+    }while(opt != 0);
+}
+
+void menuAdmin()
 {
     int opt;
     do{
@@ -235,7 +265,6 @@ void menuPesquisar()
 
 void pesquisarPessoas()
 {
-    setlocale(LC_ALL,"Portuguese");
     int opt, cpf, data, priori, codU;
     char nome[50], gen;
     do{
