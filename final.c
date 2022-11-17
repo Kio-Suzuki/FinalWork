@@ -11,14 +11,32 @@
 void gerarCodigo();
 void menuPrincipal();
 void imprimeOpcoes();
+void menuCadastro();
 void menuCadastrar();
+void menuEditar();
 void menuPesquisar();
+void adicionarPessoas();
+void dicionarEstabelecimento();
 void pesquisarPessoas();
 void pesquisarVoluntarios();
 void pesquisarRestaurantes();
 void apresentarInfocpf();
 void apresentarInfocnpj();
-
+void pesquisarPessoaNome();
+void pesquisarPessoaSobrenome();
+void pesquisarPessoaCPF();
+void pesquisarPessoaGenero();
+void setarPrioridade();
+void apresentarPrioridade();
+void pesquisarRestauranteNome();
+void pesquisarRestauranteCNPJ();
+void pesquisarRestauranteCodigo();
+void registrarTelefone();
+void registrarEndereco();
+void excluirPessoas();
+void excluirVoluntarios();
+void excluirRestaurantes();
+void excluirParceiros();
 // PESQUIIAR INFOS
 // DISTRIBUIR ALIMENTOS
 // ADICIONAR ALIMENTOS
@@ -69,21 +87,33 @@ typedef struct dadosPessoaisFisica{
     char genero;
     int cpf;
     int priori;
-    data nascimento;
+    data data;
     end endereco;
     tel telefone;
 }pfisica;
+
+typedef struct dadosVoluntario{
+    cod_p codigo;
+    char nome[50];
+    char sobrenome[50];
+    char genero;
+    int cpf;
+    int priori;
+    data data;
+    end endereco;
+    tel telefone;
+}vol;
 
 // Cadastro de restaurantes, mercados, pessoas juridicas.
 
 typedef struct doacao{
     int quantidade;
     char info[100];
-    data;
+    data data;
 }doa;
 
 typedef struct dadosPessoaisJuridica{
-    cod_e;
+    cod_e codigo;
     char nome[50];
     char sobrenome[50];
     int cnpj;
@@ -93,13 +123,13 @@ typedef struct dadosPessoaisJuridica{
 }pjuridica;
 
 typedef struct dadosFamilias{
-    cod_p;
+    cod_p codigo;
     char nome[50];
     char sobrenome[50];
     int cpf;
     int priori;
     data data;
-    end endereço;
+    end endereco;
     tel telefone;
     int membros;
 }fam;
@@ -108,7 +138,6 @@ typedef struct dadosFamilias{
 
 int main()
 {
-    setlocale(LC_ALL,"");
     menuPrincipal();
 }
     
@@ -182,7 +211,7 @@ void menuAdmin()
         switch (opt)
         {
         case 1:
-            menuCadastrar();
+            //menuCadastrar();
             break;
 
         case 2:
@@ -197,15 +226,17 @@ void menuAdmin()
 
 void imprimeOpcoes()
 {
-    
+    int opt;
     printf ("1 - Pessoas\n");
     printf ("2 - Voluntarios\n");
     printf ("3 - Restaurantes\n");
     printf ("4 - Mercados\n");
-    printf ("0 - Sair\n");    
+    printf ("0 - Sair\n");
+    printf ("Opcao: ");
+    scanf ("%d", &opt);  
 }
 
-void menuCadastrar()
+void menuCadastro()
 {
     int opt;
     do{
@@ -219,6 +250,7 @@ void menuCadastrar()
         case 1:
             imprimeOpcoes();
             scanf ("%d", &opt);
+            menuCadastrar(opt);
             break;
         
         case 2:
@@ -232,9 +264,54 @@ void menuCadastrar()
             break;
 
         default:
+            printf ("Escolhe outra opcao");
             break;
         }
     }while(opt != 0);
+}
+
+void menuCadastrar(int opt, pfisica *pfis, vol *volunt, pjuridica *pjur)
+{
+    switch (opt)
+        {
+        case 1:
+            adicionarPessoas(pfis);
+            break;
+            
+        case 2:
+            adicionarVoluntario(volunt);
+            break;
+
+        case 3:
+            adicionarEstabelecimento(pjur);
+            break;
+
+        case 4:
+            adicionarEstabelecimento(pjur);
+            break;   
+
+        default:
+            break;
+        }          
+}
+
+void menuEditar(int opt){
+    switch (opt)
+    {
+    case 1:
+        
+        break;
+    case 2:
+
+        break;
+
+    case 3:
+
+        break;
+
+    default:
+        break;
+    }
 }
 
 void menuPesquisar()
@@ -418,109 +495,283 @@ void pesquisarRestaurantes()
         default:
             break;
         }
-        }
     }while(opt != 0);
-void apresentarInfocpf(pjuridica *resul) {
-  printf("\nResultados:\n");
-  printf("\nNome: %s", resul->nome);
-  printf("Sobrenome: %s", resul->sobrenome);
-  printf("CPF: %d\n", resul->cpf);
-  printf("Código: ");
-  for (int i = 0; i < 10; i++) {
-    printf("%d", resul->codigo.codigo[i]);
-  };
-  printf("\n");
 }
+
+// FUNÇÃO APRESENTAR INFO
+
 void apresentarInfocpf(pfisica *resul) {
     printf("\nResultados:\n");
     printf("\nNome: %s", resul->nome);
     printf("Sobrenome: %s", resul->sobrenome);
     printf("CPF: %d\n", resul->cpf);
-    printf("Código: ");
-    for (int i = 0; i < 10; i++) {
-        printf("%d", resul->codigo.codP[i]);
-    };
-    printf("Data de nascimento: %d/%d/%d", resul->nascimento.dia, resul->nascimento.mes, resul->nascimento.ano);
-    printf("DDD do telefone: ", pfis->telefone.ddd);
-    printf("Telefone fixo: %d", pfis->telefone.fixo);
-    printf("Telefone celular: %d", pfis->telefone.celular);
-    printf("Prioridade: %d", pfis->priori);
-  printf("\n");
+    printf("Código: %d", resul->codigo.codP);
+    printf("Data de nascimento: %d/%d/%d", resul->data.dia, resul->data.mes, resul->data.ano);
+    printf("telefones: Fixo (%d) %d, Celular (%d) %d ", resul->telefone.ddd,resul->telefone.fixo,resul->telefone.ddd, resul->telefone.celular );
+    printf("Endereco: %s %s %s %s %s numero: %s", resul->endereco.estado,resul->endereco.cidade, resul->endereco.cep, resul->endereco.logradouro, resul->endereco.numero);
+    printf("\n");
 }
+
 void apresentarInfocnpj(pjuridica *resul) {
     printf("\nResultados:\n");
     printf("\nNome: %s", resul->nome);
-    printf("Sobrenome: %s", resul->sobrenome);
+    printf("Sobrenome (caso seja pessoa): %s", resul->sobrenome);
     printf("CNPJ: %d\n", resul->cnpj);
-    printf("Código: ");
-    printf("Codigo: %d", resul->codigop);
-    printf("Data de nascimento: %d/%d/%d", resul->nascimento.dia, resul->nascimento.mes, resul->nascimento.ano);
-    printf("DDD do telefone: ", pfis->telefone.ddd);
-    printf("Telefone fixo: %d", pfis->telefone.fixo);
-    printf("Telefone celular: %d", pfis->telefone.celular);
-    printf("Prioridade: %d", pfis->priori);
-  printf("\n");
+    printf("Codigo: %d", resul->codigo.codE);
+    printf("telefones: Fixo (%d) %d, Celular (%d) %d ", resul->telefone.ddd,resul->telefone.fixo,resul->telefone.ddd, resul->telefone.celular );
+    printf("Endereco: %s %s %s %s %s numero: %s", resul->endereco.estado,resul->endereco.cidade, resul->endereco.cep, resul->endereco.logradouro, resul->endereco.numero);
+    printf("\n");
 }
-void adicionarPessoas(pfisica *pfis, pjuridica *pjur, int doisum) {
-  if (doisum == 1) {
+
+// FUNÇÃO ADICIONAR INFOS
+
+void adicionarPessoas(pfisica *pfis) {
     fflush(stdin);
     printf("Digite o nome da pessoa: ");
     getchar();
     fgets(pfis->nome, 50, stdin);
     printf("Digite o sobrenome da pessoa: ");
     fgets(pfis->sobrenome, 50, stdin);
+    printf("Digite o genero: ");
+    scanf("%c", &pfis->genero);
     printf("Digite o cpf: ");
     scanf("%d", &pfis->cpf);
+    adicionarPrioridade(pfis);
     printf("Digite o dia de nascimento: ");
-    scanf("%d",&pfis->nascimento.dia);
+    scanf("%d",&pfis->data.dia);
     printf("Digite o mes de nascimento: ");
-    scanf("%d",&pfis->nascimento.mes);
+    scanf("%d",&pfis->data.mes);
     printf("Digite o ano de nascimento: ");
-    scanf("%d",&pfis->nascimento.ano);
+    scanf("%d",&pfis->data.ano);
     printf("Digite o DDD do telefone: ");
     scanf("%d",&pfis->telefone.ddd);
     printf("Digite o telefone fixo: ");
     scanf("%d", &pfis->telefone.fixo);
     printf("Digite o telefone celular: ");
     scanf("%d", &pfis->telefone.celular);
-    gerarCodigo(pfis, pjur, doisum);
-  } else if (doisum == 2) {
-        fflush(stdin);
-    printf("Digite o nome da pessoa/estabelecimento: ");
-    getchar();
-    fgets(pjur->nome, 50, stdin);
-    printf("Digite o sobrenome da pessoa(caso seja pessoa): ");
-    fgets(pjur->sobrenome, 50, stdin);
-    printf("Digite o cnpj: ");
-    scanf("%d", &pjur->cnpj);
-    printf("Digite o DDD do telefone: ");
-    scanf("%d",&pjur->telefone.ddd);
-    getchar();
-    printf("Digite o telefone fixo: ");
-    scanf("%d", &pjur->telefone.fixo);
-    getchar();
-    printf("Digite o telefone celular: ");
-    scanf("%d", &pjur->telefone.celular);
-    getchar();
     printf("Digite o logradouro do endereço: ");
-    scanf("%d", &pjur->endereco.logradouro);
     fflush(stdin);
     getchar();
-    printf("Digite o endereço: ");
-    fflush(stdin);
-    getchar();
-    fgets(pjur->endereco.endereco, 50, stdin);
+    fgets(pfis->endereco.logradouro, 50, stdin);
     printf("Digite o numero: ");
-    scanf("%d", &pjur->endereco.numero);
+    scanf("%d", &pfis->endereco.numero);
     printf("Digite o CEP: ");
-    scanf("%",&pjur->endereco.cep);
+    scanf("%d", &pfis->endereco.cep);
     printf("Digite o nome da cidade: ");
     fflush(stdin);
     getchar();
-    fgets(pjur->endereco.cidade, 50, stdin);
+    fgets(pfis->endereco.cidade, 50, stdin);
     printf("Digite o estado(2 letras): ");
-    scanf("%s", &pjur->endereco.estado);
-    gerarCodigo(pfis, pjur, doisum);
-  }
+    scanf("%s", &pfis->endereco.estado);
+    gerarCodigo(pfis);
 }
 
+void adicionarPessoas(pfisica *pfis) {
+    fflush(stdin);
+    printf("Digite o nome da pessoa: ");
+    getchar();
+    fgets(pfis->nome, 50, stdin);
+    printf("Digite o sobrenome da pessoa: ");
+    fgets(pfis->sobrenome, 50, stdin);
+    printf("Digite o genero: ");
+    scanf("%c", &pfis->genero);
+    printf("Digite o cpf: ");
+    scanf("%d", &pfis->cpf);
+    adicionarPrioridade(pfis);
+    printf("Digite o dia de nascimento: ");
+    scanf("%d",&pfis->data.dia);
+    printf("Digite o mes de nascimento: ");
+    scanf("%d",&pfis->data.mes);
+    printf("Digite o ano de nascimento: ");
+    scanf("%d",&pfis->data.ano);
+    printf("Digite o DDD do telefone: ");
+    scanf("%d",&pfis->telefone.ddd);
+    printf("Digite o telefone fixo: ");
+    scanf("%d", &pfis->telefone.fixo);
+    printf("Digite o telefone celular: ");
+    scanf("%d", &pfis->telefone.celular);
+    printf("Digite o logradouro do endereço: ");
+    fflush(stdin);
+    getchar();
+    fgets(pfis->endereco.logradouro, 50, stdin);
+    printf("Digite o numero: ");
+    scanf("%d", &pfis->endereco.numero);
+    printf("Digite o CEP: ");
+    scanf("%d", &pfis->endereco.cep);
+    printf("Digite o nome da cidade: ");
+    fflush(stdin);
+    getchar();
+    fgets(pfis->endereco.cidade, 50, stdin);
+    printf("Digite o estado(2 letras): ");
+    scanf("%s", &pfis->endereco.estado);
+    gerarCodigo(pfis);
+}
+
+  // PESQUISAR CPF
+    void pesquisarPessoaNome(pfisica *pessoas, char pesquisa[50], int contador) {
+        pfisica resul;
+        for (int i = 0; i < contador; i++) {
+            if (strcmp(pessoas[i].nome,pesquisa) == 1) {
+                resul = pessoas[i];
+                apresentarInfocpf(&resul);
+            }
+        }
+        };
+
+    void pesquisarPessoaSobrenome(pfisica *pessoas, char pesquisa[50], int contador) {
+        pfisica resul;
+        for (int i = 0; i < contador; i++) {
+            if (strcmp(pessoas[i].sobrenome,pesquisa) == 1) {
+                resul = pessoas[i];
+                apresentarInfocpf(&resul);
+            }
+        }
+        };
+    void pesquisarPessoaCPF(pfisica *pessoas, int pesquisa, int contador) {
+        pfisica resul;
+        for (int i = 0; i < contador; i++) {
+            if (pessoas[i].cpf == pesquisa) {
+                resul = pessoas[i];
+                apresentarInfocpf(&resul);
+            }
+        }
+        };
+    void pesquisarPessoaData(pfisica *pessoas, int dia, int mes, int ano, int contador) {
+        pfisica resul;
+        for (int i = 0; i < contador; i++) {    
+            if (pessoas[i].data.dia == dia && pessoas[i].data.mes == mes && pessoas[i].data.ano == ano) {
+                resul = pessoas[i];
+                apresentarInfocpf(&resul);
+            }
+        }
+        };
+    void pesquisarPessoaPrioridade(pfisica *pessoas, int pesquisa, int contador) {
+        pfisica resul;
+        for (int i = 0; i < contador; i++) {
+            if (pessoas[i].priori == pesquisa) {
+                resul = pessoas[i];
+                apresentarInfocpf(&resul);
+            }          
+        }
+    }    
+    void pesquisarPessoaCodigo(pfisica *pessoas, char pesquisa[50], int contador) {
+        pfisica resul;
+        for (int i = 0; i < contador; i++) {
+            if (pessoas[i].codigo.codP == pesquisa) {
+                resul = pessoas[i];
+                apresentarInfocpf(&resul);
+            }
+        }
+    }
+    void pesquisarPessoaGenero(pfisica *pessoas, char pesquisa[50], int contador){
+        pfisica resul;
+        for (int i = 0; i < contador; i++) {
+            if (strcmp(pessoas[i].genero,pesquisa) == 1) {
+                resul = pessoas[i];
+                apresentarInfocpf(&resul);
+            }
+        }
+        };
+    void setarPrioridade(pfisica *prioridade){
+        printf("Tabela de prioridade:");
+        printf("Digite a prioridade: ");
+        scanf("%d", prioridade->priori);
+    }
+    void imprimirPrioridade(pfisica *prioridade){
+        printf("\n%d", prioridade->priori);
+    }
+
+//  PESQUISAR CNPJ
+    void pesquisarRestauranteNome(pjuridica *restaurantes, char pesquisa[50], int contador) {
+        pjuridica resul;
+        for (int i = 0; i < contador; i++) {
+            if (strcmp(restaurantes[i].nome,pesquisa)==1) {
+                resul = restaurantes[i];
+                apresentarInfocnpj(&resul);
+            }
+        }
+    }
+    void pesquisarRestauranteCNPJ(pjuridica *restaurantes, int pesquisa, int contador) {
+        pjuridica resul;
+        for (int i = 0; i < contador; i++) {
+            if (restaurantes[i].cnpj == pesquisa) {
+                resul = restaurantes[i];
+                apresentarInfocnpj(&resul);
+            }
+        }
+    }
+    void pesquisarRestauranteCodigo(pjuridica *restaurantes, int pesquisa, int contador) {
+        pjuridica resul;
+        for (int i = 0; i < contador; i++) {
+            if (restaurantes[i].codigo.codE == pesquisa) {
+                resul = restaurantes[i];
+                apresentarInfocnpj(&resul);
+            }
+        }
+    }
+
+// PESQUISAR VOLUNTARIOS
+    void pesquisarVoluntariosNome(vol *voluntarios, char pesquisa[50], int contador) {
+        vol resul;
+        for (int i = 0; i < contador; i++) {
+            if (strcmp(voluntarios[i].nome,pesquisa) == 1) {
+                resul = voluntarios[i];
+                apresentarInfocpf(&resul);
+            }
+        }
+        };
+
+    void pesquisarVoluntariosSobrenome(vol *voluntarios, char pesquisa[50], int contador) {
+        vol resul;
+        for (int i = 0; i < contador; i++) {
+            if (strcmp(voluntarios[i].sobrenome,pesquisa) == 1) {
+                resul = voluntarios[i];
+                apresentarInfocpf(&resul);
+            }
+        }
+        };
+    void pesquisarVoluntariosCPF(vol *voluntarios, int pesquisa, int contador) {
+        vol resul;
+        for (int i = 0; i < contador; i++) {
+            if (voluntarios[i].cpf == pesquisa) {
+                resul = voluntarios[i];
+                apresentarInfocpf(&resul);
+            }
+        }
+        };
+    void pesquisarVoluntariosData(vol *voluntarios, int dia, int mes, int ano, int contador) {
+        vol resul;
+        for (int i = 0; i < contador; i++) {    
+            if (&voluntarios[i].data.dia == dia && voluntarios[i].data.mes == mes && voluntarios[i].data.ano == ano) {
+                resul = voluntarios[i];
+                apresentarInfocpf(&resul);
+            }
+        }
+        };
+    void pesquisarVoluntariosPrioridade(vol *voluntarios, int pesquisa, int contador) {
+        vol resul;
+        for (int i = 0; i < contador; i++) {
+            if (voluntarios[i].priori == pesquisa) {
+                resul = voluntarios[i];
+                apresentarInfocpf(&resul);
+            }          
+        }
+    }    
+    void pesquisarVoluntariosCodigo(vol *voluntarios, char pesquisa[50], int contador) {
+        vol resul;
+        for (int i = 0; i < contador; i++) {
+            if (voluntarios[i].codigo.codP == pesquisa) {
+                resul = voluntarios[i];
+                apresentarInfocpf(&resul);
+            }
+        }
+    }
+    void pesquisarVoluntariosGenero(vol *voluntarios, char pesquisa[50], int contador){
+        vol resul;
+        for (int i = 0; i < contador; i++) {
+            if (strcmp(voluntarios[i].genero,pesquisa) == 1) {
+                resul = voluntarios[i];
+                apresentarInfocpf(&resul);
+            }
+        }
+        };
