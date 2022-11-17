@@ -16,6 +16,8 @@ void menuPesquisar();
 void pesquisarPessoas();
 void pesquisarVoluntarios();
 void pesquisarRestaurantes();
+void apresentarInfocpf();
+void apresentarInfocnpj();
 
 // PESQUIIAR INFOS
 // DISTRIBUIR ALIMENTOS
@@ -35,10 +37,6 @@ typedef struct codigoPessoa{
     int codP;
 }cod_p;
 
-typedef struct codigoEstabelecimento{
-    int codE;
-}cod_e;
-
 typedef struct endereco{
     char logradouro[50];
     int numero;
@@ -46,6 +44,10 @@ typedef struct endereco{
     char cidade[50];
     char estado[2]; 
 }end;
+
+typedef struct codigoEstabelecimento{
+    int codE;
+}cod_e;
 
 // data para doação e tambem para nascimento.
 typedef struct data{
@@ -61,15 +63,15 @@ typedef struct telefone{
 }tel;
 
 typedef struct dadosPessoaisFisica{
-    cod_p;
+    cod_p codigo;
     char nome[50];
     char sobrenome[50];
     char genero;
     int cpf;
     int priori;
-    data;
-    end; 
-    tel;
+    data nascimento;
+    end endereco;
+    tel telefone;
 }pfisica;
 
 // Cadastro de restaurantes, mercados, pessoas juridicas.
@@ -85,9 +87,9 @@ typedef struct dadosPessoaisJuridica{
     char nome[50];
     char sobrenome[50];
     int cnpj;
-    end; 
-    tel;
-    doa;
+    end endereco;
+    tel telefone;
+    doa doacao;
 }pjuridica;
 
 typedef struct dadosFamilias{
@@ -96,9 +98,9 @@ typedef struct dadosFamilias{
     char sobrenome[50];
     int cpf;
     int priori;
-    data;
-    end;
-    tel;
+    data data;
+    end endereço;
+    tel telefone;
     int membros;
 }fam;
 
@@ -398,6 +400,7 @@ void pesquisarRestaurantes()
             printf ("Digite o nome: ");
             scanf ("%s", nome);
             break;
+        
 
         case 2:
             printf ("CNPJ: ");
@@ -415,6 +418,109 @@ void pesquisarRestaurantes()
         default:
             break;
         }
+        }
     }while(opt != 0);
+void apresentarInfocpf(pjuridica *resul) {
+  printf("\nResultados:\n");
+  printf("\nNome: %s", resul->nome);
+  printf("Sobrenome: %s", resul->sobrenome);
+  printf("CPF: %d\n", resul->cpf);
+  printf("Código: ");
+  for (int i = 0; i < 10; i++) {
+    printf("%d", resul->codigo.codigo[i]);
+  };
+  printf("\n");
+}
+void apresentarInfocpf(pfisica *resul) {
+    printf("\nResultados:\n");
+    printf("\nNome: %s", resul->nome);
+    printf("Sobrenome: %s", resul->sobrenome);
+    printf("CPF: %d\n", resul->cpf);
+    printf("Código: ");
+    for (int i = 0; i < 10; i++) {
+        printf("%d", resul->codigo.codP[i]);
+    };
+    printf("Data de nascimento: %d/%d/%d", resul->nascimento.dia, resul->nascimento.mes, resul->nascimento.ano);
+    printf("DDD do telefone: ", pfis->telefone.ddd);
+    printf("Telefone fixo: %d", pfis->telefone.fixo);
+    printf("Telefone celular: %d", pfis->telefone.celular);
+    printf("Prioridade: %d", pfis->priori);
+  printf("\n");
+}
+void apresentarInfocnpj(pjuridica *resul) {
+    printf("\nResultados:\n");
+    printf("\nNome: %s", resul->nome);
+    printf("Sobrenome: %s", resul->sobrenome);
+    printf("CNPJ: %d\n", resul->cnpj);
+    printf("Código: ");
+    printf("Codigo: %d", resul->codigop);
+    printf("Data de nascimento: %d/%d/%d", resul->nascimento.dia, resul->nascimento.mes, resul->nascimento.ano);
+    printf("DDD do telefone: ", pfis->telefone.ddd);
+    printf("Telefone fixo: %d", pfis->telefone.fixo);
+    printf("Telefone celular: %d", pfis->telefone.celular);
+    printf("Prioridade: %d", pfis->priori);
+  printf("\n");
+}
+void adicionarPessoas(pfisica *pfis, pjuridica *pjur, int doisum) {
+  if (doisum == 1) {
+    fflush(stdin);
+    printf("Digite o nome da pessoa: ");
+    getchar();
+    fgets(pfis->nome, 50, stdin);
+    printf("Digite o sobrenome da pessoa: ");
+    fgets(pfis->sobrenome, 50, stdin);
+    printf("Digite o cpf: ");
+    scanf("%d", &pfis->cpf);
+    printf("Digite o dia de nascimento: ");
+    scanf("%d",&pfis->nascimento.dia);
+    printf("Digite o mes de nascimento: ");
+    scanf("%d",&pfis->nascimento.mes);
+    printf("Digite o ano de nascimento: ");
+    scanf("%d",&pfis->nascimento.ano);
+    printf("Digite o DDD do telefone: ");
+    scanf("%d",&pfis->telefone.ddd);
+    printf("Digite o telefone fixo: ");
+    scanf("%d", &pfis->telefone.fixo);
+    printf("Digite o telefone celular: ");
+    scanf("%d", &pfis->telefone.celular);
+    gerarCodigo(pfis, pjur, doisum);
+  } else if (doisum == 2) {
+        fflush(stdin);
+    printf("Digite o nome da pessoa/estabelecimento: ");
+    getchar();
+    fgets(pjur->nome, 50, stdin);
+    printf("Digite o sobrenome da pessoa(caso seja pessoa): ");
+    fgets(pjur->sobrenome, 50, stdin);
+    printf("Digite o cnpj: ");
+    scanf("%d", &pjur->cnpj);
+    printf("Digite o DDD do telefone: ");
+    scanf("%d",&pjur->telefone.ddd);
+    getchar();
+    printf("Digite o telefone fixo: ");
+    scanf("%d", &pjur->telefone.fixo);
+    getchar();
+    printf("Digite o telefone celular: ");
+    scanf("%d", &pjur->telefone.celular);
+    getchar();
+    printf("Digite o logradouro do endereço: ");
+    scanf("%d", &pjur->endereco.logradouro);
+    fflush(stdin);
+    getchar();
+    printf("Digite o endereço: ");
+    fflush(stdin);
+    getchar();
+    fgets(pjur->endereco.endereco, 50, stdin);
+    printf("Digite o numero: ");
+    scanf("%d", &pjur->endereco.numero);
+    printf("Digite o CEP: ");
+    scanf("%",&pjur->endereco.cep);
+    printf("Digite o nome da cidade: ");
+    fflush(stdin);
+    getchar();
+    fgets(pjur->endereco.cidade, 50, stdin);
+    printf("Digite o estado(2 letras): ");
+    scanf("%s", &pjur->endereco.estado);
+    gerarCodigo(pfis, pjur, doisum);
+  }
 }
 
