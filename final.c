@@ -38,6 +38,12 @@ void excluirVoluntarios();
 void excluirRestaurantes();
 void excluirParceiros();
 void setarlogin();
+void editarFisica();
+void excluirFisica();
+void editarVoluntarios();
+void excluirVoluntarios();
+void editarJuridica();
+void excluirJuridica();
 // PESQUIIAR INFOS
 // DISTRIBUIR ALIMENTOS
 // ADICIONAR ALIMENTOS
@@ -609,176 +615,195 @@ void adicionarPessoas(pfisica *pfis) {
 }
 
   // PESQUISAR CPF
-    void pesquisarPessoaNome(pfisica *pessoas, char pesquisa[50], int contador) {
-        pfisica resul;
-        for (int i = 0; i < contador; i++) {
-            if (strcmp(pessoas[i].nome,pesquisa) == 1) {
-                resul = pessoas[i];
-                apresentarInfocpf(&resul);
-            }
+void pesquisarPessoaNome(pfisica *pessoas, char pesquisa[50], int contador) {
+    pfisica resul;
+    for (int i = 0; i < contador; i++) {
+        if (strcmp(pessoas[i].nome,pesquisa) == 1) {
+            resul = pessoas[i];
+            apresentarInfocpf(&resul);
         }
-        };
+    }
+    };
 
-    void pesquisarPessoaSobrenome(pfisica *pessoas, char pesquisa[50], int contador) {
-        pfisica resul;
-        for (int i = 0; i < contador; i++) {
-            if (strcmp(pessoas[i].sobrenome,pesquisa) == 1) {
-                resul = pessoas[i];
-                apresentarInfocpf(&resul);
-            }
-        }
-        };
-    void pesquisarPessoaCPF(pfisica *pessoas, int pesquisa, int contador) {
-        pfisica resul;
-        for (int i = 0; i < contador; i++) {
-            if (pessoas[i].cpf == pesquisa) {
-                resul = pessoas[i];
-                apresentarInfocpf(&resul);
-            }
-        }
-        };
-    void pesquisarPessoaData(pfisica *pessoas, int dia, int mes, int ano, int contador) {
-        pfisica resul;
-        for (int i = 0; i < contador; i++) {    
-            if (pessoas[i].data.dia == dia && pessoas[i].data.mes == mes && pessoas[i].data.ano == ano) {
-                resul = pessoas[i];
-                apresentarInfocpf(&resul);
-            }
-        }
-        };
-    void pesquisarPessoaPrioridade(pfisica *pessoas, int pesquisa, int contador) {
-        pfisica resul;
-        for (int i = 0; i < contador; i++) {
-            if (pessoas[i].priori == pesquisa) {
-                resul = pessoas[i];
-                apresentarInfocpf(&resul);
-            }          
-        }
-    }    
-    void pesquisarPessoaCodigo(pfisica *pessoas, char pesquisa[50], int contador) {
-        pfisica resul;
-        for (int i = 0; i < contador; i++) {
-            if (pessoas[i].codigo.codP == pesquisa) {
-                resul = pessoas[i];
-                apresentarInfocpf(&resul);
-            }
+void pesquisarPessoaSobrenome(pfisica *pessoas, char pesquisa[50], int contador) {
+    pfisica resul;
+    for (int i = 0; i < contador; i++) {
+        if (strcmp(pessoas[i].sobrenome,pesquisa) == 1) {
+            resul = pessoas[i];
+            apresentarInfocpf(&resul);
         }
     }
-    void pesquisarPessoaGenero(pfisica *pessoas, char pesquisa[50], int contador){
-        pfisica resul;
-        for (int i = 0; i < contador; i++) {
-            if (strcmp(pessoas[i].genero,pesquisa) == 1) {
-                resul = pessoas[i];
-                apresentarInfocpf(&resul);
-            }
+    };
+void pesquisarPessoaCPF(pfisica *pessoas, int pesquisa, int contador) {
+    pfisica resul;
+    for (int i = 0; i < contador; i++) {
+        if (pessoas[i].cpf == pesquisa) {
+            resul = pessoas[i];
+            apresentarInfocpf(&resul);
         }
-        };
-    void setarPrioridade(pfisica *prioridade){
-        printf("Tabela de prioridade:");
-        printf("Digite a prioridade: ");
-        scanf("%d", prioridade->priori);
     }
-    void imprimirPrioridade(pfisica *prioridade){
-        printf("\n%d", prioridade->priori);
+    };
+void pesquisarPessoaData(pfisica *pessoas, int dia, int mes, int ano, int contador) {
+    pfisica resul;
+    for (int i = 0; i < contador; i++) {    
+        if (pessoas[i].data.dia == dia && pessoas[i].data.mes == mes && pessoas[i].data.ano == ano) {
+            resul = pessoas[i];
+            apresentarInfocpf(&resul);
+        }
     }
+    };
+void pesquisarPessoaPrioridade(pfisica *pessoas, int pesquisa, int contador) {
+    pfisica resul;
+    for (int i = 0; i < contador; i++) {
+        if (pessoas[i].priori == pesquisa) {
+            resul = pessoas[i];
+            apresentarInfocpf(&resul);
+        }          
+    }
+}    
+void pesquisarPessoaCodigo(pfisica *pessoas, char pesquisa[50], int contador) {
+    pfisica resul;
+    for (int i = 0; i < contador; i++) {
+        if (pessoas[i].codigo.codP == pesquisa) {
+            resul = pessoas[i];
+            apresentarInfocpf(&resul);
+        }
+    }
+}
+void pesquisarPessoaGenero(pfisica *pessoas, char pesquisa[50], int contador){
+    pfisica resul;
+    for (int i = 0; i < contador; i++) {
+        if (strcmp(pessoas[i].genero,pesquisa) == 1) {
+            resul = pessoas[i];
+            apresentarInfocpf(&resul);
+        }
+    }
+    };
+void setarPrioridade(pfisica *prioridade){
+    printf("Tabela de prioridade:");
+    printf("Digite a prioridade: ");
+    scanf("%d", prioridade->priori);
+}
+void imprimirPrioridade(pfisica *prioridade){
+    printf("\n%d", prioridade->priori);
+}
 
 //  PESQUISAR CNPJ
-    void pesquisarRestauranteNome(pjuridica *restaurantes, char pesquisa[50], int contador) {
-        pjuridica resul;
-        for (int i = 0; i < contador; i++) {
-            if (strcmp(restaurantes[i].nome,pesquisa)==1) {
-                resul = restaurantes[i];
-                apresentarInfocnpj(&resul);
-            }
+void pesquisarRestauranteNome(pjuridica *restaurantes, char pesquisa[50], int contador) {
+    pjuridica resul;
+    for (int i = 0; i < contador; i++) {
+        if (strcmp(restaurantes[i].nome,pesquisa)==1) {
+            resul = restaurantes[i];
+            apresentarInfocnpj(&resul);
         }
     }
-    void pesquisarRestauranteCNPJ(pjuridica *restaurantes, int pesquisa, int contador) {
-        pjuridica resul;
-        for (int i = 0; i < contador; i++) {
-            if (restaurantes[i].cnpj == pesquisa) {
-                resul = restaurantes[i];
-                apresentarInfocnpj(&resul);
-            }
+}
+void pesquisarRestauranteCNPJ(pjuridica *restaurantes, int pesquisa, int contador) {
+    pjuridica resul;
+    for (int i = 0; i < contador; i++) {
+        if (restaurantes[i].cnpj == pesquisa) {
+            resul = restaurantes[i];
+            apresentarInfocnpj(&resul);
         }
     }
-    void pesquisarRestauranteCodigo(pjuridica *restaurantes, int pesquisa, int contador) {
-        pjuridica resul;
-        for (int i = 0; i < contador; i++) {
-            if (restaurantes[i].codigo.codE == pesquisa) {
-                resul = restaurantes[i];
-                apresentarInfocnpj(&resul);
-            }
+}
+void pesquisarRestauranteCodigo(pjuridica *restaurantes, int pesquisa, int contador) {
+    pjuridica resul;
+    for (int i = 0; i < contador; i++) {
+        if (restaurantes[i].codigo.codE == pesquisa) {
+            resul = restaurantes[i];
+            apresentarInfocnpj(&resul);
         }
     }
+}
 
 // PESQUISAR VOLUNTARIOS
-    void pesquisarVoluntariosNome(vol *voluntarios, char pesquisa[50], int contador) {
-        vol resul;
-        for (int i = 0; i < contador; i++) {
-            if (strcmp(voluntarios[i].nome,pesquisa) == 1) {
-                resul = voluntarios[i];
-                apresentarInfocpf(&resul);
-            }
-        }
-        };
-
-    void pesquisarVoluntariosSobrenome(vol *voluntarios, char pesquisa[50], int contador) {
-        vol resul;
-        for (int i = 0; i < contador; i++) {
-            if (strcmp(voluntarios[i].sobrenome,pesquisa) == 1) {
-                resul = voluntarios[i];
-                apresentarInfocpf(&resul);
-            }
-        }
-        };
-    void pesquisarVoluntariosCPF(vol *voluntarios, int pesquisa, int contador) {
-        vol resul;
-        for (int i = 0; i < contador; i++) {
-            if (voluntarios[i].cpf == pesquisa) {
-                resul = voluntarios[i];
-                apresentarInfocpf(&resul);
-            }
-        }
-        };
-    void pesquisarVoluntariosData(vol *voluntarios, int dia, int mes, int ano, int contador) {
-        vol resul;
-        for (int i = 0; i < contador; i++) {    
-            if (&voluntarios[i].data.dia == dia && voluntarios[i].data.mes == mes && voluntarios[i].data.ano == ano) {
-                resul = voluntarios[i];
-                apresentarInfocpf(&resul);
-            }
-        }
-        };
-    void pesquisarVoluntariosPrioridade(vol *voluntarios, int pesquisa, int contador) {
-        vol resul;
-        for (int i = 0; i < contador; i++) {
-            if (voluntarios[i].priori == pesquisa) {
-                resul = voluntarios[i];
-                apresentarInfocpf(&resul);
-            }          
-        }
-    }    
-    void pesquisarVoluntariosCodigo(vol *voluntarios, char pesquisa[50], int contador) {
-        vol resul;
-        for (int i = 0; i < contador; i++) {
-            if (voluntarios[i].codigo.codP == pesquisa) {
-                resul = voluntarios[i];
-                apresentarInfocpf(&resul);
-            }
+void pesquisarVoluntariosNome(vol *voluntarios, char pesquisa[50], int contador) {
+    vol resul;
+    for (int i = 0; i < contador; i++) {
+        if (strcmp(voluntarios[i].nome,pesquisa) == 1) {
+            resul = voluntarios[i];
+            apresentarInfocpf(&resul);
         }
     }
-    void pesquisarVoluntariosGenero(vol *voluntarios, char pesquisa[50], int contador){
-        vol resul;
-        for (int i = 0; i < contador; i++) {
-            if (strcmp(voluntarios[i].genero,pesquisa) == 1) {
-                resul = voluntarios[i];
-                apresentarInfocpf(&resul);
-            }
-        }
     };
-    void setarlogin(login *login){
-        printf("Defina o login: "); 
-        scanf("%s", login->login);
-        printf("Defina a senha: "); 
-        scanf("%s", login->senha);
+
+void pesquisarVoluntariosSobrenome(vol *voluntarios, char pesquisa[50], int contador) {
+    vol resul;
+    for (int i = 0; i < contador; i++) {
+        if (strcmp(voluntarios[i].sobrenome,pesquisa) == 1) {
+            resul = voluntarios[i];
+            apresentarInfocpf(&resul);
+        }
     }
+    };
+void pesquisarVoluntariosCPF(vol *voluntarios, int pesquisa, int contador) {
+    vol resul;
+    for (int i = 0; i < contador; i++) {
+        if (voluntarios[i].cpf == pesquisa) {
+            resul = voluntarios[i];
+            apresentarInfocpf(&resul);
+        }
+    }
+    };
+void pesquisarVoluntariosData(vol *voluntarios, int dia, int mes, int ano, int contador) {
+    vol resul;
+    for (int i = 0; i < contador; i++) {    
+        if (&voluntarios[i].data.dia == dia && voluntarios[i].data.mes == mes && voluntarios[i].data.ano == ano) {
+            resul = voluntarios[i];
+            apresentarInfocpf(&resul);
+        }
+    }
+    };
+void pesquisarVoluntariosPrioridade(vol *voluntarios, int pesquisa, int contador) {
+    vol resul;
+    for (int i = 0; i < contador; i++) {
+        if (voluntarios[i].priori == pesquisa) {
+            resul = voluntarios[i];
+            apresentarInfocpf(&resul);
+        }          
+    }
+}    
+void pesquisarVoluntariosCodigo(vol *voluntarios, char pesquisa[50], int contador) {
+    vol resul;
+    for (int i = 0; i < contador; i++) {
+        if (voluntarios[i].codigo.codP == pesquisa) {
+            resul = voluntarios[i];
+            apresentarInfocpf(&resul);
+        }
+    }
+}
+void pesquisarVoluntariosGenero(vol *voluntarios, char pesquisa[50], int contador){
+    vol resul;
+    for (int i = 0; i < contador; i++) {
+        if (strcmp(voluntarios[i].genero,pesquisa) == 1) {
+            resul = voluntarios[i];
+            apresentarInfocpf(&resul);
+        }
+    }
+};
+void setarlogin(login *login){
+    printf("Defina o login: "); 
+    scanf("%s", login->login);
+    printf("Defina a senha: "); 
+    scanf("%s", login->senha);
+}
+void editarVoluntarios(vol *voluntarios, int contador){
+
+}
+void excluirVoluntarios(vol *voluntarios, int contador){
+
+
+}
+void editarPessoas(pfisica *fisica, int contador){
+
+}
+void excluirPessoas(pfisica *fisica, int contador){
+
+}
+void editarRestaurantes(pjuridica *juridica, int contador){
+
+}
+void excluirRestaurantes(pjuridica *juridica, int contador){
+
+}
