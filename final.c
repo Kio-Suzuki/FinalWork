@@ -37,6 +37,7 @@ void excluirPessoas();
 void excluirVoluntarios();
 void excluirRestaurantes();
 void excluirParceiros();
+void setarlogin();
 // PESQUIIAR INFOS
 // DISTRIBUIR ALIMENTOS
 // ADICIONAR ALIMENTOS
@@ -525,7 +526,7 @@ void apresentarInfocnpj(pjuridica *resul) {
 
 // FUNÇÃO ADICIONAR INFOS
 
-void adicionarPessoas(pfisica *pfis) {
+void adicionar(pfisica *pfis, vol *voluntario) {
     fflush(stdin);
     printf("Digite o nome da pessoa: ");
     getchar();
@@ -774,4 +775,10 @@ void adicionarPessoas(pfisica *pfis) {
                 apresentarInfocpf(&resul);
             }
         }
-        };
+    };
+    void setarlogin(login *login){
+        printf("Defina o login: "); 
+        scanf("%s", login->login);
+        printf("Defina a senha: "); 
+        scanf("%s", login->senha);
+    }
