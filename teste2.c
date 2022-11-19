@@ -1,3 +1,4 @@
+#define _gnu_source
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -177,7 +178,7 @@ void menuAdmin()
         printf ("1 - Cadastramento\n");      
         printf ("2 - Pesquisa\n");
         printf ("0 - Sair\n");
-        scanf ("Opcao: ");           
+        printf ("Opcao: ");           
         scanf ("%d", &opt);
         switch (opt)
         {
@@ -185,10 +186,11 @@ void menuAdmin()
             opt=imprimeOpcoes();
             adicionarPessoas();
             break;
+    
         case 2:
             opt=imprimeOpcoes();
-            break;
-        
+            pesquisarPessoas();
+
         default:
             break;
         }    
@@ -196,43 +198,130 @@ void menuAdmin()
 }
 
 void adicionarPessoas() {
-    pfisica *pfis;
+    pfisica pfis[2];
     fflush(stdin);
-    printf("Digite o nome da pessoa: ");
+    printf("Nome: ");
     getchar();
-    fgets(pfis->nome, 50, stdin);
-    printf("Digite o sobrenome da pessoa: ");
-    fgets(pfis->sobrenome, 50, stdin);
-    printf("Digite o genero: ");
-    scanf("%c", &pfis->genero);
-    printf("Digite o cpf: ");
-    scanf("%d", &pfis->cpf);
+    //scanf("%s", pfis.nome);
+    //fflush(stdin);
+    fgets(pfis.>nome[0], 50, stdin);
+    printf("Sobrenome: ");
+    fgets(pfis.sobrenome, 50, stdin);
+    printf("Genero: ");
+    scanf("%c", &pfis.genero);
+    printf("CPF: "); //
+    scanf("%d", &pfis.cpf);
     //adicionarPrioridade(pfis);
-    printf("Digite o dia de nascimento: ");
-    scanf("%d",&pfis->data.dia);
-    printf("Digite o mes de nascimento: ");
-    scanf("%d",&pfis->data.mes);
-    printf("Digite o ano de nascimento: ");
-    scanf("%d",&pfis->data.ano);
-    printf("Digite o DDD do telefone: ");
-    scanf("%d",&pfis->telefone.ddd);
-    printf("Digite o telefone fixo: ");
-    scanf("%d", &pfis->telefone.fixo);
-    printf("Digite o telefone celular: ");
-    scanf("%d", &pfis->telefone.celular);
-    printf("Digite o logradouro do endereço: ");
+    printf("Dia do nascimento: ");
+    scanf("%d", &pfis.data.dia);
+    printf("Mes do nascimento: ");
+    scanf("%d", &pfis.data.mes);
+    printf("Ano de nascimento: ");
+    scanf("%d", &pfis.data.ano);
+    printf("DDD do telefone: ");
+    scanf("%d", &pfis.telefone.ddd);
+    printf("Telefone fixo (Digite 0 caso nao tenha): ");
+    scanf("%d", &pfis.telefone.fixo);
+    printf("Telefone celular (Digite 0 caso nao tenha): ");
+    scanf("%d", &pfis.telefone.celular);
+    printf("Logradouro do endereço: ");
     fflush(stdin);
     getchar();
-    fgets(pfis->endereco.logradouro, 50, stdin);
-    printf("Digite o numero: ");
-    scanf("%d", &pfis->endereco.numero);
-    printf("Digite o CEP: ");
-    scanf("%d", &pfis->endereco.cep);
-    printf("Digite o nome da cidade: ");
+    fgets(pfis.endereco.logradouro, 50, stdin);
+    printf("Numero da casa: ");
+    scanf("%d", &pfis.endereco.numero);
+    printf("CEP: ");
+    scanf("%d", &pfis.endereco.cep);
+    printf("Nome da cidade: ");
     fflush(stdin);
     getchar();
-    fgets(pfis->endereco.cidade, 50, stdin);
-    printf("Digite o estado(2 letras): ");
-    scanf("%s", &pfis->endereco.estado);
+    fgets(pfis.endereco.cidade, 50, stdin);
+    printf("Estado(2 letras): ");
+    scanf("%s", pfis.endereco.estado);
     //gerarCodigo(pfis);
+}
+void pesquisarPessoas()
+{
+    int opt, cpf, data, priori, codU;
+    char nome[50], gen;
+    do{
+        printf ("1 - Nome\n");
+        printf ("2 - Sobrenome\n");
+        printf ("3 - CPF\n");
+        printf ("4 - Genero\n");
+        printf ("5 - Data de nascimento\n");
+        printf ("6 - Prioridade\n");
+        printf ("7 - Codigo Unico\n");
+        printf ("8 - Retornar\n");
+        printf ("0 - Sair\n");
+        printf ("Opcao: ");
+        scanf ("%d", &opt);       
+        switch (opt)
+        {
+        case 1:
+            printf ("Digite o nome: ");
+            scanf ("%s", nome);
+            pesquisarPessoaNome(nome);
+            break;
+
+        case 2:
+            printf ("Digite o sobrenome: ");
+            scanf ("%s", nome);
+            break;
+
+        case 3:
+            printf ("CPF: ");
+            scanf ("%d", &cpf);
+            break;
+
+        case 4:
+            printf ("Genero: ");
+            scanf ("%c", &gen);
+            break;
+            
+        case 5:
+            printf ("Data de nascimento: ");
+            scanf ("%d", &data);
+            break;
+
+        case 6:
+            printf ("Prioridade: ");
+            scanf ("%d", &priori);
+            break;
+
+        case 7:
+            printf ("Codigo Unico: ");
+            scanf ("%d", &codU);
+            break;
+
+        case 8:
+            //menuPesquisar();
+                
+        default:
+            break;
+        }
+    }while(opt != 0);
+}
+
+void pesquisarPessoaNome(pfisica *pessoas, char pesquisa[50], int contador) {
+    pfisica resul;
+    for (int i = 0; i < contador; i++) {
+        if (strcmp(pessoas[i].nome,pesquisa) == 1) {
+            resul = pessoas[i];
+            apresentarInfocpf(&resul,i);
+        }
+    }
+}
+
+void apresentarInfocpf(pfisica resul, int pos) {
+    printf("\nResultados:\n");
+    printf("\nNome: %s\n", resul->nome);
+    printf("Sobrenome: %s\n", resul->sobrenome);
+    printf("CPF: %d\n", resul->cpf);
+    printf("Código: %d\n", resul->codigo.codP);
+    printf("Data de nascimento: %d/%d/%d\n", resul->data.dia, resul->data.mes, resul->data.ano);
+    printf("telefones: Fixo (%d) %d, Celular (%d) %d\n", resul->telefone.ddd,resul->telefone.fixo,resul->telefone.ddd, resul->telefone.celular );
+    printf("Endereco: %s %s %s %s %s numero: %s\n", resul->endereco.estado,resul->endereco.cidade, resul->endereco.cep, resul->endereco.logradouro, resul->endereco.numero);
+    printf("Posição no vetor: %d\n", pos);
+    printf("\n");
 }

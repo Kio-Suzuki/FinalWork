@@ -1,3 +1,4 @@
+#define _gnu_source
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -507,7 +508,7 @@ void pesquisarRestaurantes()
 
 // FUNÇÃO APRESENTAR INFO
 
-void apresentarInfocpf(pfisica *resul) {
+void apresentarInfocpf(pfisica *resul, int pos) {
     printf("\nResultados:\n");
     printf("\nNome: %s", resul->nome);
     printf("Sobrenome: %s", resul->sobrenome);
@@ -516,10 +517,11 @@ void apresentarInfocpf(pfisica *resul) {
     printf("Data de nascimento: %d/%d/%d", resul->data.dia, resul->data.mes, resul->data.ano);
     printf("telefones: Fixo (%d) %d, Celular (%d) %d ", resul->telefone.ddd,resul->telefone.fixo,resul->telefone.ddd, resul->telefone.celular );
     printf("Endereco: %s %s %s %s %s numero: %s", resul->endereco.estado,resul->endereco.cidade, resul->endereco.cep, resul->endereco.logradouro, resul->endereco.numero);
+    printf("Posição no vetor: %d", pos);
     printf("\n");
 }
 
-void apresentarInfocnpj(pjuridica *resul) {
+void apresentarInfocnpj(pjuridica *resul, int pos) {
     printf("\nResultados:\n");
     printf("\nNome: %s", resul->nome);
     printf("Sobrenome (caso seja pessoa): %s", resul->sobrenome);
@@ -527,6 +529,7 @@ void apresentarInfocnpj(pjuridica *resul) {
     printf("Codigo: %d", resul->codigo.codE);
     printf("telefones: Fixo (%d) %d, Celular (%d) %d ", resul->telefone.ddd,resul->telefone.fixo,resul->telefone.ddd, resul->telefone.celular );
     printf("Endereco: %s %s %s %s %s numero: %s", resul->endereco.estado,resul->endereco.cidade, resul->endereco.cep, resul->endereco.logradouro, resul->endereco.numero);
+    printf("Posição no vetor: %d", pos); 
     printf("\n");
 }
 
@@ -620,7 +623,7 @@ void pesquisarPessoaNome(pfisica *pessoas, char pesquisa[50], int contador) {
     for (int i = 0; i < contador; i++) {
         if (strcmp(pessoas[i].nome,pesquisa) == 1) {
             resul = pessoas[i];
-            apresentarInfocpf(&resul);
+            apresentarInfocpf(&resul,i);
         }
     }
     };
@@ -630,7 +633,7 @@ void pesquisarPessoaSobrenome(pfisica *pessoas, char pesquisa[50], int contador)
     for (int i = 0; i < contador; i++) {
         if (strcmp(pessoas[i].sobrenome,pesquisa) == 1) {
             resul = pessoas[i];
-            apresentarInfocpf(&resul);
+            apresentarInfocpf(&resul,i);
         }
     }
     };
@@ -639,7 +642,7 @@ void pesquisarPessoaCPF(pfisica *pessoas, int pesquisa, int contador) {
     for (int i = 0; i < contador; i++) {
         if (pessoas[i].cpf == pesquisa) {
             resul = pessoas[i];
-            apresentarInfocpf(&resul);
+            apresentarInfocpf(&resul,i);
         }
     }
     };
@@ -648,7 +651,7 @@ void pesquisarPessoaData(pfisica *pessoas, int dia, int mes, int ano, int contad
     for (int i = 0; i < contador; i++) {    
         if (pessoas[i].data.dia == dia && pessoas[i].data.mes == mes && pessoas[i].data.ano == ano) {
             resul = pessoas[i];
-            apresentarInfocpf(&resul);
+            apresentarInfocpf(&resul,i);
         }
     }
     };
@@ -657,7 +660,7 @@ void pesquisarPessoaPrioridade(pfisica *pessoas, int pesquisa, int contador) {
     for (int i = 0; i < contador; i++) {
         if (pessoas[i].priori == pesquisa) {
             resul = pessoas[i];
-            apresentarInfocpf(&resul);
+            apresentarInfocpf(&resul,i);
         }          
     }
 }    
@@ -666,7 +669,7 @@ void pesquisarPessoaCodigo(pfisica *pessoas, char pesquisa[50], int contador) {
     for (int i = 0; i < contador; i++) {
         if (pessoas[i].codigo.codP == pesquisa) {
             resul = pessoas[i];
-            apresentarInfocpf(&resul);
+            apresentarInfocpf(&resul,i);
         }
     }
 }
@@ -675,7 +678,7 @@ void pesquisarPessoaGenero(pfisica *pessoas, char pesquisa[50], int contador){
     for (int i = 0; i < contador; i++) {
         if (strcmp(pessoas[i].genero,pesquisa) == 1) {
             resul = pessoas[i];
-            apresentarInfocpf(&resul);
+            apresentarInfocpf(&resul,i);
         }
     }
     };
@@ -694,7 +697,7 @@ void pesquisarRestauranteNome(pjuridica *restaurantes, char pesquisa[50], int co
     for (int i = 0; i < contador; i++) {
         if (strcmp(restaurantes[i].nome,pesquisa)==1) {
             resul = restaurantes[i];
-            apresentarInfocnpj(&resul);
+            apresentarInfocnpj(&resul,i);
         }
     }
 }
@@ -703,7 +706,7 @@ void pesquisarRestauranteCNPJ(pjuridica *restaurantes, int pesquisa, int contado
     for (int i = 0; i < contador; i++) {
         if (restaurantes[i].cnpj == pesquisa) {
             resul = restaurantes[i];
-            apresentarInfocnpj(&resul);
+            apresentarInfocnpj(&resul,i);
         }
     }
 }
@@ -712,7 +715,7 @@ void pesquisarRestauranteCodigo(pjuridica *restaurantes, int pesquisa, int conta
     for (int i = 0; i < contador; i++) {
         if (restaurantes[i].codigo.codE == pesquisa) {
             resul = restaurantes[i];
-            apresentarInfocnpj(&resul);
+            apresentarInfocnpj(&resul,i);
         }
     }
 }
@@ -723,7 +726,7 @@ void pesquisarVoluntariosNome(vol *voluntarios, char pesquisa[50], int contador)
     for (int i = 0; i < contador; i++) {
         if (strcmp(voluntarios[i].nome,pesquisa) == 1) {
             resul = voluntarios[i];
-            apresentarInfocpf(&resul);
+            apresentarInfocpf(&resul,i);
         }
     }
     };
@@ -733,7 +736,7 @@ void pesquisarVoluntariosSobrenome(vol *voluntarios, char pesquisa[50], int cont
     for (int i = 0; i < contador; i++) {
         if (strcmp(voluntarios[i].sobrenome,pesquisa) == 1) {
             resul = voluntarios[i];
-            apresentarInfocpf(&resul);
+            apresentarInfocpf(&resul,i);
         }
     }
     };
@@ -742,7 +745,7 @@ void pesquisarVoluntariosCPF(vol *voluntarios, int pesquisa, int contador) {
     for (int i = 0; i < contador; i++) {
         if (voluntarios[i].cpf == pesquisa) {
             resul = voluntarios[i];
-            apresentarInfocpf(&resul);
+            apresentarInfocpf(&resul,i);
         }
     }
     };
@@ -751,7 +754,7 @@ void pesquisarVoluntariosData(vol *voluntarios, int dia, int mes, int ano, int c
     for (int i = 0; i < contador; i++) {    
         if (&voluntarios[i].data.dia == dia && voluntarios[i].data.mes == mes && voluntarios[i].data.ano == ano) {
             resul = voluntarios[i];
-            apresentarInfocpf(&resul);
+            apresentarInfocpf(&resul,i);
         }
     }
     };
@@ -760,7 +763,7 @@ void pesquisarVoluntariosPrioridade(vol *voluntarios, int pesquisa, int contador
     for (int i = 0; i < contador; i++) {
         if (voluntarios[i].priori == pesquisa) {
             resul = voluntarios[i];
-            apresentarInfocpf(&resul);
+            apresentarInfocpf(&resul, i);
         }          
     }
 }    
@@ -769,7 +772,7 @@ void pesquisarVoluntariosCodigo(vol *voluntarios, char pesquisa[50], int contado
     for (int i = 0; i < contador; i++) {
         if (voluntarios[i].codigo.codP == pesquisa) {
             resul = voluntarios[i];
-            apresentarInfocpf(&resul);
+            apresentarInfocpf(&resul,i);
         }
     }
 }
@@ -778,7 +781,7 @@ void pesquisarVoluntariosGenero(vol *voluntarios, char pesquisa[50], int contado
     for (int i = 0; i < contador; i++) {
         if (strcmp(voluntarios[i].genero,pesquisa) == 1) {
             resul = voluntarios[i];
-            apresentarInfocpf(&resul);
+            apresentarInfocpf(&resul,i);
         }
     }
 };
@@ -789,7 +792,8 @@ void setarlogin(login *login){
     scanf("%s", login->senha);
 }
 void editarVoluntarios(vol *voluntarios, int contador){
-
+    void pesquisarVoluntarios();
+    pritnf
 }
 void excluirVoluntarios(vol *voluntarios, int contador){
 
