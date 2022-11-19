@@ -189,7 +189,7 @@ void menuAdmin(vol *voluntario, pfisica *fisica, pjuridica *juridica, int contad
         {
         case 1:
             opt=imprimeOpcoes(voluntario, juridica, fisica, contador);
-            contador++
+            contador++;
             adicionarPessoas(fisica);
             break;
     
@@ -265,7 +265,8 @@ void pesquisarPessoas(pfisica *fisica, int contador)
         {
         case 1:
             printf ("Digite o nome: ");
-            fgets (nome,50, stdin);
+            fflush(stdin);
+            fgets (nome, 50, stdin);
             pesquisarPessoaNome(fisica, contador, nome);
             break;
 
@@ -320,13 +321,13 @@ void pesquisarPessoaNome(pfisica *fisica, int contador, char pesquisa[50]) {
 
 void apresentarInfocpf(pfisica *fisica, int pos) {
     printf("\nResultados:\n");
-    printf("\nNome: %s\n", fisica->nome);
-    printf("Sobrenome: %s\n", fisica->sobrenome);
+    printf("Nome: %s", fisica->nome);
+    printf("Sobrenome: %s", fisica->sobrenome);
     printf("CPF: %d\n", fisica->cpf);
     printf("Código: %d\n", fisica->codigo.codP);
     printf("Data de nascimento: %d/%d/%d\n", fisica->data.dia, fisica->data.mes, fisica->data.ano);
-    printf("telefones: Fixo (%d) %d, Celular (%d) %d\n", fisica->telefone.ddd,fisica->telefone.fixo,fisica->telefone.ddd, fisica->telefone.celular );
-    printf("Endereco: %s %s %d %s  numero: %d\n", fisica->endereco.estado,fisica->endereco.cidade, fisica->endereco.cep, fisica->endereco.logradouro, fisica->endereco.numero);
+    printf("Telefones: Fixo (%d) %d, Celular (%d) %d\n", fisica->telefone.ddd,fisica->telefone.fixo,fisica->telefone.ddd, fisica->telefone.celular );
+    printf("Endereco: %sNumero: %d\nCEP:%d\n%s%s\n", fisica->endereco.logradouro, fisica->endereco.numero, fisica->endereco.cep, fisica->endereco.cidade, fisica->endereco.estado);
     printf("Posição no vetor: %d\n", pos);
     printf("\n");
 }
