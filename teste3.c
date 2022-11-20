@@ -151,8 +151,7 @@ void menuPrincipal(vol *voluntario, pfisica *fisica, pjuridica *juridica, int co
             }else{
                 printf ("Senha incorreta, tente novamente");
             }
-            break;
-        
+            break;        
         case 2:
             printf ("Pesquisar restaurantes: \n");
             printf ("1 - Endereco\n");
@@ -195,7 +194,7 @@ void menuAdmin(vol *voluntario, pfisica *fisica, pjuridica *juridica, int contad
     
         case 2:
             opt=imprimeOpcoes(voluntario, juridica, fisica, contador);
-            pesquisarPessoas(fisica, contador);
+            pesquisarPessoas(voluntario, juridica, fisica, contador);
 
         default:
             break;
@@ -204,48 +203,59 @@ void menuAdmin(vol *voluntario, pfisica *fisica, pjuridica *juridica, int contad
 }
 
 void adicionarPessoas(pfisica *fisica) {
-    fflush(stdin);
-    printf("Nome: ");
     getchar();
+    printf("Nome: ");
     //scanf("%s", fisica.nome);
     //fflush(stdin);
     fgets(fisica->nome, 50, stdin);
+    fflush(stdin);
     printf("Sobrenome: ");
     fgets(fisica->sobrenome, 50, stdin);
+    fflush(stdin);
     printf("Genero: ");
     scanf("%c", &fisica->genero);
+    fflush(stdin);
     printf("CPF: "); //
     scanf("%d", &fisica->cpf);
+    fflush(stdin);
     //adicionarPrioridade(fisica);
     printf("Dia do nascimento: ");
     scanf("%d", &fisica->data.dia);
+    fflush(stdin);
     printf("Mes do nascimento: ");
     scanf("%d", &fisica->data.mes);
+    fflush(stdin);
     printf("Ano de nascimento: ");
     scanf("%d", &fisica->data.ano);
-    printf("DDD do telefone: ");
+    fflush(stdin);
+    printf("DDD do telefone(Digite 0 caso não tenha): ");
+    fflush(stdin);
     scanf("%d", &fisica->telefone.ddd);
+    fflush(stdin);
     printf("Telefone fixo (Digite 0 caso nao tenha): ");
     scanf("%d", &fisica->telefone.fixo);
+    fflush(stdin);
     printf("Telefone celular (Digite 0 caso nao tenha): ");
     scanf("%d", &fisica->telefone.celular);
-    printf("Logradouro do endereço: ");
     fflush(stdin);
-    getchar();
+    printf("Logradouro do endereço (Digite X caso não tenha): ");
     fgets(fisica->endereco.logradouro, 50, stdin);
-    printf("Numero da casa: ");
-    scanf("%d", &fisica->endereco.numero);
-    printf("CEP: ");
-    scanf("%d", &fisica->endereco.cep);
-    printf("Nome da cidade: ");
     fflush(stdin);
-    getchar();
+    printf("Numero da casa(Digite 0 caso não tenha): ");
+    scanf("%d", &fisica->endereco.numero);
+    fflush(stdin);
+    printf("CEP(Digite 0 caso não tenha): ");
+    scanf("%d", &fisica->endereco.cep);
+    fflush(stdin);
+    printf("Nome da cidade: ");
     fgets(fisica->endereco.cidade, 50, stdin);
+    fflush(stdin);
     printf("Estado(2 letras): ");
     scanf("%s", fisica->endereco.estado);
+    fflush(stdin);
     //gerarCodigo(fisica);
 }
-void pesquisarPessoas(pfisica *fisica, int contador)
+void pesquisarPessoas(pfisica *fisica, vol *voluntario, pjuridica *juridica,  int contador)
 {
     int opt, cpf, data, priori, codU;
     char nome[50], gen;
@@ -266,8 +276,8 @@ void pesquisarPessoas(pfisica *fisica, int contador)
         case 1:
             printf ("Digite o nome: ");
             fflush(stdin);
-            fgets (nome, 50, stdin);
-            pesquisarPessoaNome(fisica, contador, nome);
+            fgets(nome, 50, stdin);
+            pesquisarPessoaNome(fisica, juridica, voluntario, contador, nome);
             break;
 
         case 2:
@@ -304,17 +314,16 @@ void pesquisarPessoas(pfisica *fisica, int contador)
             //menuPesquisar();
                 
         default:
+
             break;
         }
     }while(opt != 0);
 }
-
-void pesquisarPessoaNome(pfisica *fisica, int contador, char pesquisa[50]) {
-    pfisica *resul;
+void pesquisarPessoaNome(pfisica *fisica, pjuridica *juridica, vol *voluntario, int contador, char pesquisa[50]) {
     for (int i = 0; i < contador; i++) {
         if (strcmp(fisica[i].nome,pesquisa) == 1) {
-            resul = &fisica[i];
-            apresentarInfocpf(resul, i);
+            apresentarInfocpf(&fisica[i], i);
+            menuAdmin(voluntario, juridica, fisica, contador);
         }
     }
 }
