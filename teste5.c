@@ -164,7 +164,7 @@ pfisica cadastrarPessoa(void)
     FILE *fp;
     char nome[50];
     char filename[50];
-    char id[10] = {'0','0','0','0','0','0','0','0','0','0',};
+    char id[10];
     gerarCodigo(id);
     printf ("%s\n", id);
     printf("Digite o nome do arquivo: ");
