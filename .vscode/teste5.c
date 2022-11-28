@@ -15,10 +15,6 @@ typedef struct data{
     int ano;
 }data;
 
-typedef struct codigoPessoa{
-    int cod;
-}cod_p;
-
 typedef struct codigoEstabelecimento{
     int codE;
 }cod_e;
@@ -37,19 +33,8 @@ typedef struct endereco{
     char estado[10]; 
 }end;
 
-typedef struct dadosVoluntario{
-    cod_p codigo;
-    char nome[50];
-    char sobrenome[50];
-    char cpf[20];
-    char genero;
-    data nascimento;
-    end endereco;
-    tel telefone;
-}vol;
-
 typedef struct cdadosPessoaisFisica{
-    cod_p id;
+    char id[20];
     char nome[50];
     char genero;
     char cpf[20];
@@ -59,6 +44,16 @@ typedef struct cdadosPessoaisFisica{
     end endereco;
     tel telefone;
 }pfisica;
+
+typedef struct dadosVoluntario{
+    char nome[50];
+    char sobrenome[50];
+    char cpf[20];
+    char genero;
+    data nascimento;
+    end endereco;
+    tel telefone;
+}vol;
 
 typedef struct doacao{
     int quantidade;
@@ -83,6 +78,7 @@ pfisica apresentarPessoa(void);
 vol apresentarVoluntario(void);
 rest apresentarRestaurante(void);
 void apresentarPrioridade();
+int gerarCodigo();
 
 int main()
 {
@@ -168,6 +164,9 @@ pfisica cadastrarPessoa(void)
     FILE *fp;
     char nome[50];
     char filename[50];
+    char id[10];
+    gerarCodigo(id);
+    printf ("%s\n", id);
     printf("Digite o nome do arquivo: ");
     scanf("%s", nome);
     sprintf(filename, "Pessoa %s.txt", nome);
@@ -212,7 +211,7 @@ pfisica cadastrarPessoa(void)
     printf ("Prioridade: ");
     scanf ("%d", &p.priori);
     printf ("Cadastro realizado com sucesso!\n");
-    fprintf(fp, "Nome: %sGênero: %c\nCPF: %sData de nascimento %d/%d/%d\nLogradouro: %sNúmero:%d\nCEP: %d\nCidade: %sEstado: %sTelefone (%d) %d\nCelular (%d) %d\nPrioridade: %d", p.nome, p.genero, p.cpf,  p.nascimento.dia, p.nascimento.mes, p.nascimento.ano, p.endereco.logradouro, p.endereco.numero, p.endereco.cep, p.endereco.cidade, p.endereco.estado, p.telefone.ddd, p.telefone.fixo, p.telefone.ddd, p.telefone.celular, p.priori);
+    fprintf(fp, "Nome: %sGênero: %c\nCPF: %sData de nascimento %d/%d/%d\nLogradouro: %sNúmero: %d\nCEP: %d\nCidade: %sEstado: %sTelefone (%d) %d\nCelular (%d) %d\nPrioridade: %d\nID: %s", p.nome, p.genero, p.cpf,  p.nascimento.dia, p.nascimento.mes, p.nascimento.ano, p.endereco.logradouro, p.endereco.numero, p.endereco.cep, p.endereco.cidade, p.endereco.estado, p.telefone.ddd, p.telefone.fixo, p.telefone.ddd, p.telefone.celular, p.priori, id);
     fclose(fp);
     return p;
 }
@@ -390,4 +389,28 @@ void apresentarPrioridade()
     printf("Prioridade 3: Famílias/Indivíduos adultos sem filhos em situação de rua.\n");
     printf("Prioridade 4: Famílias com filhos com idade entre 10 e 16 anos em situação de rua.\n");
     printf("Prioridade 5 (mais vulnerável): Famílias com filhos com idade menor de 10 anos de idade e em situação de rua.\n");
+}
+
+int gerarCodigo(char id[10])
+{
+    int cod[10][10], i, j, cont = 0; 
+    srand(time(NULL));
+    for (i = 0; i < 10; i++){                                      
+        for (j = 0; j < 10; j++){                              
+            cod[i][j] = rand() %2;                              
+        }
+    }
+    for (i = 0; i < 10; i++){
+        for (j = 0; j < 10; j++){
+            if (cod[j][i] == 1){
+                cont++;
+            }  
+        } 
+        if (cont >= 5){
+            id[i] = '1';
+        }else{
+            id[i] = '0'; 
+        }  
+        cont = 0;  
+    }
 }

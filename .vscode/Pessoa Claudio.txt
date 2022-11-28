@@ -1,0 +1,13 @@
+Nome: Claudio Manoel
+Gênero: m
+CPF: 95450430410
+Data de nascimento 10/10/2000
+Logradouro: Sergipe
+Número: 100
+CEP: 79503305
+Cidade: Londrina
+Estado: PR
+Telefone (0) 0
+Celular (0) 0
+Prioridade: 1
+ID: 1110111110Pessoa claudio.txt

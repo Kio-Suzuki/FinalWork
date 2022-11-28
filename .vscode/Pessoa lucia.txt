@@ -1,0 +1,13 @@
+Nome: Lucia Ribeiro
+Gênero: f
+CPF: 95040319504
+Data de nascimento 10/10/2000
+Logradouro: Belgica
+Número: 23
+CEP: 89045320
+Cidade: Londrina
+Estado: PR
+Telefone (43) 0
+Celular (43) 999102445
+Prioridade: 1
+ID: 0111111110Pessoa lucia.txt

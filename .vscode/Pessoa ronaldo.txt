@@ -1,0 +1,13 @@
+Nome: Ronaldo Munhoz
+Gênero: m
+CPF: 04539529530
+Data de nascimento 10/10/2000
+Logradouro: Finlandia
+Número: 854
+CEP: 86043290
+Cidade: Londrina
+Estado: PR
+Telefone (0) 0
+Celular (0) 0
+Prioridade: 1
+ID: 1010011010Pessoa ronaldo.txt

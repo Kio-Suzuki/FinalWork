@@ -1,0 +1,13 @@
+Nome: Mara Alves
+Gênero: f
+CPF: 03291865410
+Data de nascimento 6/12/1999
+Logradouro: Mato Grosso
+Número:12
+CEP: 86000310
+Cidade: Londrina
+Estado: PR
+Telefone (43) 33119060
+Celular (43) 988175514
+Prioridade: 5
+ID: o
