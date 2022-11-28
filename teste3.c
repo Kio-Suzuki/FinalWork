@@ -125,6 +125,35 @@ int main()
     return 0;
 }
 
+void menuAdmin(vol *voluntario, pfisica *fisica, pjuridica *juridica, int contador)
+{
+    int opt;
+    do{
+        printf ("MENU ADMINISTRADOR\n");                              
+        printf ("1 - Cadastramento\n");      
+        printf ("2 - Pesquisa\n");
+        printf ("0 - Sair\n");
+        printf ("Opcao: ");           
+        scanf ("%d", &opt);
+        switch (opt)
+        {
+        case 1:
+            opt=imprimeOpcoes(voluntario, juridica, fisica, contador);
+            contador++;
+            fisica = (pfisica *) realloc(fisica, contador*sizeof(pfisica));
+            adicionarPessoas(fisica, contador);
+            break;
+    
+        case 2:
+            opt=imprimeOpcoes(voluntario, juridica, fisica, contador);
+            pesquisarPessoas(voluntario, juridica, fisica, contador);
+
+        default:
+            break;
+        }    
+    }while(opt != 0);
+}
+
 void menuPrincipal(vol *voluntario, pfisica *fisica, pjuridica *juridica, int contador) // precisa receber login e senha
 {
     int opt, compl, comps;
@@ -147,7 +176,7 @@ void menuPrincipal(vol *voluntario, pfisica *fisica, pjuridica *juridica, int co
             compl = strcmp(login1, login2);
             comps = strcmp(senha1, senha2);
             if(compl == 0 && comps == 0){
-                menuAdmin(voluntario, juridica, fisica, contador);
+                menuAdmin(voluntario, fisica, juridica, contador);
             }else{
                 printf ("Senha incorreta, tente novamente");
             }
@@ -174,84 +203,57 @@ int imprimeOpcoes()
     return 0;
 };
 
-void menuAdmin(vol *voluntario, pfisica *fisica, pjuridica *juridica, int contador)
-{
-    int opt;
-    do{
-        printf ("MENU ADMINISTRADOR\n");                              
-        printf ("1 - Cadastramento\n");      
-        printf ("2 - Pesquisa\n");
-        printf ("0 - Sair\n");
-        printf ("Opcao: ");           
-        scanf ("%d", &opt);
-        switch (opt)
-        {
-        case 1:
-            opt=imprimeOpcoes(voluntario, juridica, fisica, contador);
-            contador++;
-            adicionarPessoas(fisica);
-            break;
-    
-        case 2:
-            opt=imprimeOpcoes(voluntario, juridica, fisica, contador);
-            pesquisarPessoas(voluntario, juridica, fisica, contador);
-
-        default:
-            break;
-        }    
-    }while(opt != 0);
-}
-
-void adicionarPessoas(pfisica *fisica) {
+void adicionarPessoas(pfisica *fisica, int contador) {
     getchar();
     printf("Nome: ");
     //scanf("%s", fisica.nome);
     //fflush(stdin);
-    fgets(fisica->nome, 50, stdin);
+    fgets(fisica[contador].nome, 50, stdin);
     fflush(stdin);
     printf("Sobrenome: ");
-    fgets(fisica->sobrenome, 50, stdin);
+    fgets(fisica[contador].sobrenome, 50, stdin);
     fflush(stdin);
     printf("Genero: ");
-    scanf("%c", &fisica->genero);
+    scanf("%c", &fisica[contador].genero);
     fflush(stdin);
     printf("CPF: "); //
-    scanf("%d", &fisica->cpf);
+    scanf("%d", &fisica[contador].cpf);
     fflush(stdin);
-    //adicionarPrioridade(fisica);
+    printf("Prioridade: ");
+    scanf("%d", &fisica[contador].priori);
     printf("Dia do nascimento: ");
-    scanf("%d", &fisica->data.dia);
+    scanf("%d", &fisica[contador].data.dia);
     fflush(stdin);
     printf("Mes do nascimento: ");
-    scanf("%d", &fisica->data.mes);
+    scanf("%d", &fisica[contador].data.mes);
     fflush(stdin);
     printf("Ano de nascimento: ");
-    scanf("%d", &fisica->data.ano);
+    scanf("%d", &fisica[contador].data.ano);
     fflush(stdin);
     printf("DDD do telefone(Digite 0 caso não tenha): ");
     fflush(stdin);
-    scanf("%d", &fisica->telefone.ddd);
+    scanf("%d", &fisica[contador].telefone.ddd);
     fflush(stdin);
     printf("Telefone fixo (Digite 0 caso nao tenha): ");
-    scanf("%d", &fisica->telefone.fixo);
+    scanf("%d", &fisica[contador].telefone.fixo);
     fflush(stdin);
     printf("Telefone celular (Digite 0 caso nao tenha): ");
-    scanf("%d", &fisica->telefone.celular);
+    scanf("%d", &fisica[contador].telefone.celular);
     fflush(stdin);
     printf("Logradouro do endereço (Digite X caso não tenha): ");
-    fgets(fisica->endereco.logradouro, 50, stdin);
+    fgets(fisica[contador].endereco.logradouro, 50, stdin);
     fflush(stdin);
     printf("Numero da casa(Digite 0 caso não tenha): ");
-    scanf("%d", &fisica->endereco.numero);
+    scanf("%d", &fisica[contador].endereco.numero);
     fflush(stdin);
     printf("CEP(Digite 0 caso não tenha): ");
-    scanf("%d", &fisica->endereco.cep);
+    scanf("%d", &fisica[contador].endereco.cep);
     fflush(stdin);
     printf("Nome da cidade: ");
-    fgets(fisica->endereco.cidade, 50, stdin);
+    fgets(fisica[contador].endereco.cidade, 50, stdin);
     fflush(stdin);
     printf("Estado(2 letras): ");
-    scanf("%s", fisica->endereco.estado);
+    scanf("%s", fisica[contador].endereco.estado);
     fflush(stdin);
     //gerarCodigo(fisica);
 }
@@ -323,7 +325,7 @@ void pesquisarPessoaNome(pfisica *fisica, pjuridica *juridica, vol *voluntario, 
     for (int i = 0; i < contador; i++) {
         if (strcmp(fisica[i].nome,pesquisa) == 1) {
             apresentarInfocpf(&fisica[i], i);
-            menuAdmin(voluntario, juridica, fisica, contador);
+            menuAdmin(voluntario, fisica, juridica, contador);
         }
     }
 }

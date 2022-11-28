@@ -1,0 +1,9 @@
+Nome: Patio Sao Miguel
+CNPJ: 486048505
+Logradouro: Higienopolis
+Numero:895
+CEP: 34756934
+Cidade: Londrina
+Estado: PR
+Telefone (43) 33001000
+Celular (43) 999991000

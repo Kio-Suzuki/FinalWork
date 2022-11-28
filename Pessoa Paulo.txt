@@ -1,0 +1,11 @@
+Nome: Paulo Roberto
+Gênero: m
+CPF: 1128489434
+Data de nascimento 10/10/1999
+Logradouro: Sergipe
+Número:100
+CEP: 8903430
+Cidade: Londrina
+Estado: PR+
+Telefone (43) 33004000
+Celular (43) 999341000
