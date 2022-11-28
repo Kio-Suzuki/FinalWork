@@ -93,7 +93,7 @@ int main()
 void apresentarMenu()
 {
     int opt;
-    printf ("\nMENU\n");
+    printf ("MENU\n");
     printf ("1 - Administrador\n");
     printf ("2 - Visitante\n");
     printf ("3 - Sair\n");
