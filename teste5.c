@@ -79,6 +79,7 @@ vol apresentarVoluntario(void);
 rest apresentarRestaurante(void);
 void apresentarPrioridade();
 int gerarCodigo();
+void movimentarComida();
 
 int main()
 {
@@ -89,6 +90,8 @@ int main()
 void apresentarMenu()
 {
     int opt;
+    int *comida = malloc(1*sizeof(int));
+    comida[0]=0;
     printf ("MENU\n");
     printf ("1 - Administrador\n");
     printf ("2 - Visitante\n");
@@ -105,6 +108,7 @@ void apresentarMenu()
             printf ("4 - Pesquisar Pessoa\n");
             printf ("5 - Pesquisar Voluntario\n");
             printf ("6 - Pesquisar Restaurante\n");
+            printf ("7 - Gerenciar pratos\n");
             printf ("0 - Sair\n");
             printf ("Opcao: ");
             scanf ("%d", &opt);
@@ -133,16 +137,17 @@ void apresentarMenu()
             case 6:
                 apresentarRestaurante();
                 break;
-            
+            case 7: 
+                movimentarComida(comida);
+                break;
             case 0:
                 printf ("Ate mais!");
                 break;
-
             default:
                 printf ("Escolha outra opcao");
                 break;
             }
-        }while(opt >= 1 && opt <= 6);
+        }while(opt >= 1 && opt <= 7);
             break;
     
     case 2:
@@ -164,7 +169,7 @@ pfisica cadastrarPessoa(void)
     FILE *fp;
     char nome[50];
     char filename[50];
-    char id[10];
+    char id[11] = {'0','0','0','0','0','0','0','0','0','0','\0'};
     gerarCodigo(id);
     printf ("%s\n", id);
     printf("Digite o nome do arquivo: ");
@@ -391,7 +396,7 @@ void apresentarPrioridade()
     printf("Prioridade 5 (mais vulnerável): Famílias com filhos com idade menor de 10 anos de idade e em situação de rua.\n");
 }
 
-int gerarCodigo(char id[10])
+int gerarCodigo(char id[11])
 {
     int cod[10][10], i, j, cont = 0; 
     srand(time(NULL));
@@ -413,4 +418,28 @@ int gerarCodigo(char id[10])
         }  
         cont = 0;  
     }
+}
+void movimentarComida(int *comida){
+    int escolha;
+    do{
+        printf("Quantidade atual de pratos: %d\n", comida[0]);
+        printf("Digite 1 para aumentar o numero de pratos\n");
+        printf("Digite 2 para diminuir o numero de pratos\n");
+        printf("Digite 0 para voltar\n");
+        scanf("%d", &escolha);
+        switch(escolha){
+            case 1: 
+                comida[0]++;
+                break;
+            case 2:
+                comida[0]--;
+                break;
+            case 0:
+                printf("Tchau!\n");
+                break;
+            default:
+                printf ("Escolha outra opcao");
+                break;
+        }
+    }while(escolha!=0);
 }
