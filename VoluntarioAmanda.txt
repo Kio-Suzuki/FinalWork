@@ -1,9 +1,0 @@
-Nome: Amanda Jesus
-Gênero: f
-CPF: 550281666
-Data de nascimento 10/10/2000
-Logradouro: MaranhNúmero:856
-CEP: 86040300
-Cidade: CornEstado: PR
-Telefone (43) 33330000
-Celular (43) 999105000

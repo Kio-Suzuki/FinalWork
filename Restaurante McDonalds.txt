@@ -1,9 +1,0 @@
-Nome: Ronald McDonalds
-CNPJ: 2003484330
-Logradouro: Higienopolis
-Numero:100
-CEP: 86403250
-Cidade: Londrina
-Estado: PR
-Telefone (43) 0
-Celular (43) 999931000

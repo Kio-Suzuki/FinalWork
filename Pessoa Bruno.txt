@@ -1,0 +1,13 @@
+Nome: Bruno Souza
+Gênero: m
+CPF: 05620030070
+Data de nascimento 2/7/2000
+Logradouro: Sergipe
+Número: 50
+CEP: 86040390
+Cidade: Londrina
+Estado: PR
+Telefone (43) 0
+Celular (43) 988001590
+Prioridade: 1
+ID: 1100111101

@@ -1,0 +1,9 @@
+Nome: Comidaria LTDA
+CNPJ: 0001200465930
+Logradouro: Higienopolis
+Numero:100
+CEP: 86040300
+Cidade: Londrina
+Estado: PR
+Telefone (43) 33001000
+Celular (43) 999402000

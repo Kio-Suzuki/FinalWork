@@ -1,0 +1,11 @@
+Nome: Ana Claudia
+CPF: 05015025038
+Gênero: f
+Data de nascimento 30/5/1999
+Logradouro: Alagoas
+Número:50
+CEP: 86040390
+Cidade: Londrina
+Estado: PR
+Telefone (43) 33001000
+Celular (43) 988001121
