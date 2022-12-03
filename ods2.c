@@ -83,6 +83,7 @@ void movimentarComida();
 
 int main()
 {
+    setlocale(LC_ALL,"Portuguese_Brasil.1252");
     apresentarMenu();
     return 0;
 }
@@ -103,12 +104,12 @@ void apresentarMenu()
     case 1:
         do{
             printf ("\n1 - Cadastrar Pessoa\n");
-            printf ("2 - Cadastrar Voluntario\n");
+            printf ("2 - Cadastrar Voluntário\n");
             printf ("3 - Cadastrar Restaurante\n");
             printf ("4 - Pesquisar Pessoa\n");
-            printf ("5 - Pesquisar Voluntario\n");
+            printf ("5 - Pesquisar Voluntário\n");
             printf ("6 - Pesquisar Restaurante\n");
-            printf ("7 - Gerenciar pratos\n");
+            printf ("7 - Gerenciar Pratos\n");
             printf ("8 - Voltar\n");
             printf ("0 - Sair\n");
             printf ("Opcao: ");
@@ -145,10 +146,10 @@ void apresentarMenu()
                 apresentarMenu();
                 break;    
             case 0:
-                printf ("Ate mais!\n");
+                printf ("Até mais!\n");
                 break;
             default:
-                printf ("Escolha outra opcao\n");
+                printf ("Escolha outra opção\n");
                 break;
             }
         }while(opt >= 1 && opt <= 7);
@@ -167,11 +168,11 @@ void apresentarMenu()
         break;
 
     case 0:
-        printf ("Ate mais!\n");
+        printf ("Até mais!\n");
         break;
 
     default:
-        printf ("Escolha outra opcao");
+        printf ("Escolha outra opção");
         apresentarMenu();
         break;
     }
@@ -195,20 +196,20 @@ pfisica cadastrarPessoa(void)
     printf ("CPF: ");
     fflush(stdin);
     fgets (p.cpf, 20, stdin);
-    printf ("Genero(1 letra): ");
+    printf ("Gênero(1 letra): ");
     scanf (" %c", &p.genero);
     printf ("Nascimento\n");
     printf ("Dia: ");
     scanf ("%d", &p.nascimento.dia);
-    printf ("Mes: ");
+    printf ("Mês: ");
     scanf ("%d", &p.nascimento.mes);
     printf ("Ano: ");
     scanf ("%d", &p.nascimento.ano);
-    printf ("Endereco (caso não tenha digite 0 nas perguntas seguintes)\n");
+    printf ("Endereço (caso não tenha digite 0 nas perguntas seguintes)\n");
     printf ("Rua: ");
     fflush(stdin);
     fgets (p.endereco.logradouro, 50, stdin);
-    printf ("Numero: ");
+    printf ("Número: ");
     scanf ("%d", &p.endereco.numero);
     printf ("CEP: ");
     scanf ("%d", &p.endereco.cep);
@@ -251,11 +252,11 @@ rest cadastrarRestaurante(void)
     printf ("CNPJ: ");
     fflush(stdin);
     fgets (r.cnpj, 30, stdin);
-    printf ("Endereco\n");
+    printf ("Endereço\n");
     printf ("Rua: ");
     fflush(stdin);
     fgets (r.endereco.logradouro, 50, stdin);
-    printf ("Numero: ");
+    printf ("Número: ");
     scanf ("%d", &r.endereco.numero);
     printf ("CEP: ");
     scanf ("%d", &r.endereco.cep);
@@ -294,12 +295,12 @@ vol cadastrarVoluntario(void)
     printf ("CPF: ");
     fflush(stdin);
     fgets (v.cpf, 20, stdin);
-    printf ("Genero(1 letra): ");
+    printf ("Gênero(1 letra): ");
     scanf ("%c", &v.genero);
     printf ("Nascimento\n");
     printf ("Dia: ");
     scanf ("%d", &v.nascimento.dia);
-    printf ("Mes: ");
+    printf ("Mês: ");
     scanf ("%d", &v.nascimento.mes);
     printf ("Ano: ");
     scanf ("%d", &v.nascimento.ano);
@@ -307,7 +308,7 @@ vol cadastrarVoluntario(void)
     printf ("Rua: ");
     fflush(stdin);
     fgets (v.endereco.logradouro, 50, stdin);
-    printf ("Numero: ");
+    printf ("Número: ");
     scanf ("%d", &v.endereco.numero);
     printf ("CEP: ");
     scanf ("%d", &v.endereco.cep);
@@ -435,8 +436,8 @@ void movimentarComida(int *comida){
     int escolha;
     do{
         printf("Quantidade atual de pratos: %d\n", comida[0]);
-        printf("1 - Aumentar o numero de pratos\n");
-        printf("2 - Diminuir o numero de pratos\n");
+        printf("1 - Aumentar o número de pratos\n");
+        printf("2 - Diminuir o número de pratos\n");
         printf("0 - Voltar\n");
         printf ("Opcao: ");
         scanf("%d", &escolha);
@@ -451,7 +452,7 @@ void movimentarComida(int *comida){
                 printf("Tchau!\n");
                 break;
             default:
-                printf ("Escolha outra opcao");
+                printf ("Escolha outra opção");
                 break;
         }
     }while(escolha!=0);
